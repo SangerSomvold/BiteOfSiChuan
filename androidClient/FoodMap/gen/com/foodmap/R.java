@@ -646,30 +646,28 @@ containing a value of this type.
         public static final int sr_tv_simple_item=0x7f03001c;
     }
     public static final class string {
-        public static final int action_settings=0x7f08001d;
-        public static final int adress=0x7f080028;
+        public static final int action_settings=0x7f080019;
+        public static final int adress=0x7f080024;
         public static final int app_name=0x7f080006;
-        public static final int cancle=0x7f08002c;
-        public static final int check_password=0x7f080018;
-        public static final int collection=0x7f080021;
-        public static final int comment=0x7f080022;
-        public static final int costAvg=0x7f080026;
-        public static final int feature=0x7f080023;
-        public static final int gradeAvg=0x7f080027;
-        public static final int hello_world=0x7f08001c;
-        public static final int hinit_main=0x7f080011;
-        public static final int info=0x7f080024;
-        public static final int info_simple=0x7f080025;
-        public static final int loadDraft=0x7f08002d;
-        public static final int login_label_checkpassword=0x7f08001f;
-        public static final int login_label_password=0x7f080013;
-        public static final int login_label_signin=0x7f080012;
-        public static final int login_label_username=0x7f080016;
-        public static final int login_register_link=0x7f08001a;
-        public static final int login_username_hint=0x7f080019;
-        public static final int map_img_main=0x7f08000f;
-        public static final int ok=0x7f08002b;
-        public static final int phone=0x7f080017;
+        public static final int cancle=0x7f080028;
+        public static final int check_password=0x7f080017;
+        public static final int collection=0x7f08001d;
+        public static final int comment=0x7f08001e;
+        public static final int costAvg=0x7f080022;
+        public static final int feature=0x7f08001f;
+        public static final int gradeAvg=0x7f080023;
+        public static final int hinit_main=0x7f080010;
+        public static final int info=0x7f080020;
+        public static final int info_simple=0x7f080021;
+        public static final int loadDraft=0x7f080029;
+        public static final int login_label_checkpassword=0x7f08001b;
+        public static final int login_label_password=0x7f080012;
+        public static final int login_label_signin=0x7f080011;
+        public static final int login_label_username=0x7f080015;
+        public static final int login_register_link=0x7f080018;
+        public static final int map=0x7f08000e;
+        public static final int ok=0x7f080027;
+        public static final int phone=0x7f080016;
         /**  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
          */
         public static final int pull_to_refresh_from_bottom_pull_label=0x7f080003;
@@ -678,23 +676,21 @@ containing a value of this type.
         public static final int pull_to_refresh_pull_label=0x7f080000;
         public static final int pull_to_refresh_refreshing_label=0x7f080002;
         public static final int pull_to_refresh_release_label=0x7f080001;
-        public static final int register_label=0x7f080015;
-        public static final int register_label_phone=0x7f08001e;
-        public static final int register_login=0x7f080020;
-        public static final int search_main=0x7f080010;
-        public static final int shopName=0x7f080029;
-        public static final int spinnerText=0x7f08002a;
-        public static final int str_sr_account=0x7f08000a;
-        public static final int str_sr_con_classfy=0x7f08000b;
-        public static final int str_sr_con_location=0x7f08000c;
-        public static final int str_sr_con_rank=0x7f08000d;
-        public static final int str_sr_map_img=0x7f080008;
-        public static final int str_sr_search_img=0x7f080009;
+        public static final int register_label=0x7f080014;
+        public static final int register_label_phone=0x7f08001a;
+        public static final int register_login=0x7f08001c;
+        public static final int search_main=0x7f08000f;
+        public static final int shopName=0x7f080025;
+        public static final int spinnerText=0x7f080026;
+        public static final int str_sr_account=0x7f080009;
+        public static final int str_sr_con_classfy=0x7f08000a;
+        public static final int str_sr_con_location=0x7f08000b;
+        public static final int str_sr_con_rank=0x7f08000c;
+        public static final int str_sr_search_img=0x7f080008;
         public static final int str_sr_usr_img=0x7f080007;
-        public static final int title_activity_test=0x7f08001b;
-        public static final int upShop=0x7f08002e;
-        public static final int user_name=0x7f080014;
-        public static final int usr_img_main=0x7f08000e;
+        public static final int upShop=0x7f08002a;
+        public static final int user_name=0x7f080013;
+        public static final int usr_img_main=0x7f08000d;
     }
     public static final class style {
         /** 
