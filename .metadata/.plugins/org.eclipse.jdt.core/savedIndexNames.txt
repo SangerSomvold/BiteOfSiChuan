@@ -1,0 +1,10 @@
+INDEX VERSION 1.126+E:\Coding\WorkSpace\Android\biteOfSiChuan\.metadata\.plugins\org.eclipse.jdt.core
+1452762973.index
+124033948.index
+3716517278.index
+3553253331.index
+3208574334.index
+2277131192.index
+3407975220.index
+2894415820.index
+3079754981.index
