@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.baidu.mapapi.map.MapView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/bmapView_mapView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_above="@+id/refrshMap_main"
-    android:clickable="true" >
-
-</com.baidu.mapapi.map.MapView><!-- From: file:/E:/Coding/WorkSpace/Android/FoodMap/res/layout/mapview_activity.xml -->
