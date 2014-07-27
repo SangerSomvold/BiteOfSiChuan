@@ -30,6 +30,7 @@ import com.foomap.model.TypeData;
 import com.foomap.model.UserInfo;
 import com.foomap.service.HttpServiceHelper.IOnHttpRequeseListener;
 import com.foomap.service.ShophttpService;
+import com.foomap.service.TypehttpService;
 import com.foomap.util.ShopJsonUtils;
 import com.foomap.view.KeywordsFlow;
 
@@ -71,7 +72,7 @@ public class MainActivity extends Activity implements OnFocusChangeListener,
 	private final int SEARCH_CONTENT = 0;
 	private final int SEARCH_TYPE = 1;
 	//类型数据
-	private ShophttpService shophttpService;
+	private TypehttpService typehttpService;
 	private ArrayList<TypeData> dataList;
 	private ArrayList<TypeData> showDataList;
 	
@@ -96,9 +97,9 @@ public class MainActivity extends Activity implements OnFocusChangeListener,
 		search_ok = (Button) findViewById(R.id.search_ok_main);
 		inPutHistory = new InPutHistory(context);
 		keywordsFlow = (KeywordsFlow) findViewById(R.id.KeywordsFlow_main);
-		shophttpService=new ShophttpService(context);
+		typehttpService=new TypehttpService(context);
 		
-		shophttpService.getTypeList(new IOnHttpRequeseListener() {
+		typehttpService.getTypeList(new IOnHttpRequeseListener() {
 			
 			@Override
 			public void finished(String jsonRes) {

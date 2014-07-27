@@ -1,6 +1,7 @@
 package com.foomap.view;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 import android.util.Log;
@@ -34,24 +35,24 @@ public class PoiCommentView extends LinearLayout {
 	private static String TAG = "PoiCommentView";
 	// 数据请求
 	private CommentHttpService chHttpService;
-    //listComment内容
+	// listComment内容
 	private PullToRefreshListView commentList;
 	private ArrayList<CommentData> commentListData;
 	private CommentListAdapter listAdapter;
-	//消费 评价等级
+	// 消费 评价等级
 	private TextView userCost;
 	private RatingBar userGrade;
 	//
-    private int pageNumber=1;
+	private int pageNumber = 1;
 	private int shopId;
-	//发挥数据监听
+	// 发挥数据监听
 	private CommentRequestListener listener;
-	
-	//list滚动状态
-	private boolean isBusy=false;
+
+	// list滚动状态
+	private boolean isBusy = false;
 	//
-	private boolean isRefreshing=false;
-	private boolean isFirst=true;
+	private boolean isRefreshing = false;
+	private boolean isFirst = true;
 
 	public PoiCommentView(Context context) {
 		super(context);
@@ -63,12 +64,12 @@ public class PoiCommentView extends LinearLayout {
 	}
 
 	public void init() {
-		userGrade=(RatingBar)findViewById(R.id.userGrade_poiDetail);
-		userCost=(TextView)findViewById(R.id.userCost_poiDetail);
-		
-		listener=new CommentRequestListener();
-		listAdapter=new CommentListAdapter();
-		commentListData=null;
+		userGrade = (RatingBar) findViewById(R.id.userGrade_poiDetail);
+		userCost = (TextView) findViewById(R.id.userCost_poiDetail);
+
+		listener = new CommentRequestListener();
+		listAdapter = new CommentListAdapter();
+		commentListData = null;
 		commentList = (PullToRefreshListView) findViewById(R.id.commentList_poiDetail);
 		commentList.setMode(Mode.PULL_FROM_END);
 		commentList.setOnScrollListener(new CommentScrollListener());
@@ -78,110 +79,98 @@ public class PoiCommentView extends LinearLayout {
 			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 				// TODO Auto-generated method stub
-				if(chHttpService!=null&&!isRefreshing)
-				{
-					isRefreshing=true;
-					chHttpService.getComments(shopId, pageNumber,listener);		
-					
-				}
-				else
-				{
+				if (chHttpService != null && !isRefreshing) {
+					isRefreshing = true;
+					chHttpService.getComments(shopId, pageNumber, listener);
+
+				} else {
 					commentList.onRefreshComplete();
 				}
 			}
 		});
 	}
-	
-
 
 	public void refreash(int shopId) {
-		this.shopId=shopId;
+		this.shopId = shopId;
 		if (chHttpService == null) {
 			chHttpService = new CommentHttpService(context);
 		}
-		if(commentListData==null)
-		{
-			commentListData=new ArrayList<CommentData>();
+		if (commentListData == null) {
+			commentListData = new ArrayList<CommentData>();
 		}
-		isRefreshing=true;
+		isRefreshing = true;
 		// 请求
-		chHttpService.getComments(shopId,1,listener);
-		
-	}
-	
+		chHttpService.getComments(shopId, 1, listener);
 
-	//服务器返回数据处理
-	private class CommentRequestListener implements IOnHttpRequeseListener
-	{
+	}
+
+	// 服务器返回数据处理
+	private class CommentRequestListener implements IOnHttpRequeseListener {
 
 		@Override
 		public void finished(String jsonRes) {
 			// TODO Auto-generated method stub
 			// 返回数据处理
-			if(jsonRes==null)
-			{
-				isRefreshing=false;
+			if (jsonRes == null) {
+				isRefreshing = false;
 				commentList.onRefreshComplete();
-				return ;
+				return;
 			}
-		
+
 			Log.i(TAG, jsonRes);
-			int oldDataSize=commentListData.size();
-			ArrayList<CommentData> tmpList= CommentJsonUtil.getComentList(jsonRes);
-			int remainder=commentListData.size()%10;
-			Log.i(TAG,"SIZE------->"+commentListData.size()+"");
-			if(tmpList!=null&&tmpList.size()>0)
-			{
-			      if(remainder==0)
-			      {
-			    	  commentListData.addAll(tmpList);
-			      }
-			      else
-			      {
-			    	  //删除最后一页数据 
-			    	  
-			    	  for(int i=0;i<remainder;i++)
-			    	  {
-			    		  int size=commentListData.size();
-			    		  commentListData.remove(size-1);
-			    	  }
-			    	  commentListData.addAll(tmpList);
-			      }
-			      if(commentListData.size()%10==0)
-		    	  {
-		    		  pageNumber++;
-		    	  }
-				//刷新界面
-			  	commentList.onRefreshComplete();
+			int oldDataSize = commentListData.size();
+			ArrayList<CommentData> tmpList = CommentJsonUtil
+					.getComentList(jsonRes);
+			int remainder = commentListData.size() % 10;
+			Log.i(TAG, "SIZE------->" + commentListData.size() + "");
+			if (tmpList != null && tmpList.size() > 0) {
+				if (remainder == 0) {
+					commentListData.addAll(tmpList);
+				} else {
+					// 删除最后一页数据
+
+					for (int i = 0; i < remainder; i++) {
+						int size = commentListData.size();
+						commentListData.remove(size - 1);
+					}
+					commentListData.addAll(tmpList);
+				}
+				if (commentListData.size() % 10 == 0) {
+					pageNumber++;
+				}
+				// 刷新界面
+				commentList.onRefreshComplete();
 				listAdapter.notifyDataSetChanged();
-			
-			
+
 			}
-			//无数据
-			if(oldDataSize==commentListData.size())
-			{
-				Log.i(TAG,"isFirst"+ isFirst);
-			
-				if(!isFirst)
-				{
-					Toast.makeText(context, "没有评论了亲", Toast.LENGTH_SHORT).show();		
+			// 无数据
+			if (oldDataSize == commentListData.size()) {
+				Log.i(TAG, "isFirst" + isFirst);
+
+				if (!isFirst) {
+					Toast.makeText(context, "没有评论了亲", Toast.LENGTH_SHORT)
+							.show();
 				}
 				commentList.onRefreshComplete();
 			}
-			isRefreshing=false;
-			isFirst=false;
-			
+			isRefreshing = false;
+			isFirst = false;
+
 		}
-		
+
 	}
+
 	// commentList Adapter
 	private class CommentListAdapter extends BaseAdapter {
+		private final int VIEW_TYPE_COUNT = 2;
+		private final int WITH_PIC = 0;
+		private final int WITHOUT_PIC = 1;
+		LayoutInflater lf = LayoutInflater.from(context);
 
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			if(commentListData==null)
-			{
+			if (commentListData == null) {
 				return 0;
 			}
 			return commentListData.size();
@@ -200,107 +189,119 @@ public class PoiCommentView extends LinearLayout {
 		}
 
 		@Override
+		public int getItemViewType(int position) {
+			// TODO Auto-generated method stub
+			List<String> picsUrl = commentListData.get(position).picUrl;
+			if (picsUrl != null && picsUrl.size() > 0) {
+				return WITH_PIC;
+			} else {
+				return WITHOUT_PIC;
+			}
+		}
+
+		@Override
+		public int getViewTypeCount() {
+			// TODO Auto-generated method stub
+			return VIEW_TYPE_COUNT;
+		}
+
+		@Override
 		public View getView(int position, View container, ViewGroup arg2) {
 			// TODO Auto-generated method stub
+			int type = getItemViewType(position);
 			ViewHolder holder = null;
+
 			if (container == null) {
-				LayoutInflater lf = LayoutInflater.from(context);
 				holder = new ViewHolder();
-				container = lf.inflate(R.layout.comment_item_poidetail, null);
+				if(type==WITH_PIC)
+				{
+					container = lf.inflate(R.layout.comment_item_pic_poidetail,
+							null);
+				}
+				else if(type==WITHOUT_PIC)
+				{
+					container = lf.inflate(R.layout.comment_item_poidetail,
+							null);
+				}
+			
 				holder.comment_tx = (TextView) container
 						.findViewById(R.id.usr_comment_poiDetail);
 				holder.date_tx = (TextView) container
 						.findViewById(R.id.comment_date_poiDetail);
 				holder.userId_tx = (TextView) container
 						.findViewById(R.id.usr_name_poiDetail);
-				holder.picsContainer = (LinearLayout) container
-						.findViewById(R.id.comment_picsContainer_piodetail);
-				holder.cost_tx=(TextView)container.findViewById(R.id.userCost_poiDetail);
-				holder.grade_rb=(RatingBar)container.findViewById(R.id.userGrade_poiDetail);
-				
+				holder.cost_tx = (TextView) container
+						.findViewById(R.id.userCost_poiDetail);
+				holder.grade_rb = (RatingBar) container
+						.findViewById(R.id.userGrade_poiDetail);
+
+				if (type == WITH_PIC) {
+					holder.commentPic = (ImageView) container
+							.findViewById(R.id.omment_pic_poidetail);
+
+				}
 				container.setTag(holder);
 
 			} else {
 				holder = (ViewHolder) container.getTag();
+
 			}
-			holder.userId_tx.setText(commentListData.get(position).userId+"");
-			 holder.date_tx.setText(commentListData.get(position).commentTime+"");
-			holder.comment_tx.setText(commentListData.get(position).comment+"");
-			holder.grade_rb.setRating((float) commentListData.get(position).grade);
-			holder.cost_tx.setText("¥"+commentListData.get(position).cost+"");
-			
-			// 添加图片
-			ArrayList<String> picUrlS = commentListData.get(position).picUrl;
-			//图片存在
-			if(picUrlS!=null)
-			{
-				int parentWide=holder.picsContainer.getWidth();
-				
-				//页面加载并显示
-			
-					Log.i(TAG, picUrlS.size()+"");
-					holder.picsContainer.removeAllViews();
-					for (int i = 0; i < picUrlS.size(); i++) {
-						
-						
-						ImageView imView = new ImageView(context);
-						// 设置图片属性
-						//父空间宽度
-						
-						LinearLayout.LayoutParams lp = new LayoutParams(parentWide/3
-								,
-								DensityUtil.px2dip(context, 250));
-						imView.setLayoutParams(lp);
-						holder.picsContainer.addView(imView);
-						imView.setBackgroundResource(R.drawable.ic_launcher);
-						if(!isBusy)
-						{
-							ImageManager.Load(picUrlS.get(i), imView, ImageManager.options);
-						}
-					}
-				}
+
+			holder.userId_tx.setText(commentListData.get(position).userId + "");
+			holder.date_tx.setText(commentListData.get(position).commentTime
+					+ "");
+			holder.comment_tx.setText(commentListData.get(position).comment
+					+ "");
+			holder.grade_rb
+					.setRating((float) commentListData.get(position).grade);
+			holder.cost_tx.setText("¥" + commentListData.get(position).cost
+					+ "");
+			if (type == WITH_PIC) {
+				ImageManager.Load(commentListData.get(position).picUrl.get(0), holder.commentPic, ImageManager.options);
+			}
+
 			return container;
 		}
 
 		private class ViewHolder {
-			public TextView userId_tx, date_tx, comment_tx,cost_tx;
-			public LinearLayout picsContainer;
+			public TextView userId_tx, date_tx, comment_tx, cost_tx;
 			public RatingBar grade_rb;
+			public ImageView commentPic;
 		}
 
 	}
-	//判定listView 滚动状态
-	public class CommentScrollListener implements OnScrollListener
-	{
+
+	// 判定listView 滚动状态
+	public class CommentScrollListener implements OnScrollListener {
 
 		@Override
 		public void onScroll(AbsListView arg0, int arg1, int arg2, int arg3) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void onScrollStateChanged(AbsListView arg0, int scrollState) {
 			// TODO Auto-generated method stub
 			switch (scrollState) {
-			case OnScrollListener.SCROLL_STATE_IDLE://空闲状态
-				isBusy=false;
-				
+			case OnScrollListener.SCROLL_STATE_IDLE:// 空闲状态
+				isBusy = false;
+
 				break;
-			case OnScrollListener.SCROLL_STATE_FLING://滚动状态
-				isBusy=true;
-				
+			case OnScrollListener.SCROLL_STATE_FLING:// 滚动状态
+				isBusy = true;
+
 				break;
-			case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL://触摸后滚动
-				isBusy=false;
-					
+			case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:// 触摸后滚动
+				isBusy = false;
+
 				break;
 			default:
 				break;
 			}
-			
+
 		}
-		
+
 	}
 
 }

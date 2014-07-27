@@ -40,8 +40,7 @@ public class ShophttpService extends HttpServiceHelper {
 	private  final String DATA_BYTYPE = BASE_URI + "data_byType";
 	// 名称搜索
 	private  final String DATA_BYKEY = BASE_URI + "data_byKey";
-	// 类型
-	private  final String DATA_TYPE = "http://10.252.252.31:8080/foodmap/type/type_get";
+
 	// 添加大图片
 	private  final String DATA_UP_IMG = BASE_URI + "upImg";
 
@@ -281,12 +280,7 @@ public class ShophttpService extends HttpServiceHelper {
 		}
 	}
 
-	// 获得所有商铺类型
-	public void getTypeList(IOnHttpRequeseListener listener) {
-		setRequestListener(listener);
-		get_Asyn(DATA_TYPE, null);
 
-	}
 
 	// 搜索条件限制接口
 	public interface ISearchOption {

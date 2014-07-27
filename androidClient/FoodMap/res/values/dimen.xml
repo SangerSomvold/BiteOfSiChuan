@@ -47,8 +47,8 @@
     <dimen name="sr_main_myplace_textsize">13dp</dimen>
     <dimen name="sr_main_back_width">50dp</dimen>
     <dimen name="sr_main_back_height">40dp</dimen>
-    <dimen name="commentPanel_height">75dp</dimen>
-    <dimen name="commentInfoForUser_height">25dp</dimen>
+    <dimen name="commentPanel_height">100dp</dimen>
+    <dimen name="commentInfoForUser_height">20dp</dimen>
     <dimen name="text_size_middle">25sp</dimen>
     <dimen name="poiPicMax_Height">150dp</dimen>
     <dimen name="dividerHeight">5dp</dimen>
@@ -61,6 +61,8 @@
     <dimen name="poi_shopname_textsize">20dp</dimen>
     <dimen name="poi_divider_width">2dp</dimen>
     <dimen name="poi_feature_poidetail_textsize">16dp</dimen>
-       <dimen name="poi_comment_panel_height">100dp</dimen>
+      <dimen name="poi_comment_panel_height">100dp</dimen>
+     <dimen name="poi_commentPic_wide">80dp</dimen>
+      <dimen name="poi_commentContent_hight">60dp</dimen>
     
 </resources>

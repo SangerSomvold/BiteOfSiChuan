@@ -26,6 +26,7 @@ import com.foomap.model.TypeData;
 import com.foomap.service.HttpServiceHelper.IOnHttpRequeseListener;
 import com.foomap.service.LocationSever;
 import com.foomap.service.ShophttpService;
+import com.foomap.service.TypehttpService;
 import com.foomap.service.ShophttpService.ISearchOption;
 import com.foomap.util.CheckNetworkConnected;
 import com.foomap.util.SearchResultListAdapter;
@@ -188,8 +189,8 @@ public class SearchResultActivity extends Activity implements OnClickListener {
 	}
 
 	private void firstConUpdate() {
-		ShophttpService shs = new ShophttpService(this);
-		shs.getTypeList(new IOnHttpRequeseListener() {
+		TypehttpService types = new TypehttpService(this);
+		types.getTypeList(new IOnHttpRequeseListener() {
 
 			@Override
 			public void finished(String jsonRes) {
