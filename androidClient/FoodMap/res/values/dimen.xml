@@ -61,5 +61,6 @@
     <dimen name="poi_shopname_textsize">20dp</dimen>
     <dimen name="poi_divider_width">2dp</dimen>
     <dimen name="poi_feature_poidetail_textsize">16dp</dimen>
+       <dimen name="poi_comment_panel_height">100dp</dimen>
     
 </resources>

@@ -308,6 +308,7 @@ containing a value of this type.
         public static final int poiDesItem_Wide=0x7f070034;
         public static final int poiDes_Height=0x7f070033;
         public static final int poiPicMax_Height=0x7f070031;
+        public static final int poi_comment_panel_height=0x7f07003c;
         public static final int poi_divider_width=0x7f07003a;
         public static final int poi_feature_poidetail_textsize=0x7f07003b;
         public static final int poi_padding=0x7f070036;
