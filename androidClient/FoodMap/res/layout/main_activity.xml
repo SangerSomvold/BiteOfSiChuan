@@ -68,7 +68,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:text="@string/search_main"
+                android:text="@string/search"
                 android:textSize="@dimen/text_size_small" />
         </RelativeLayout>
     </FrameLayout>

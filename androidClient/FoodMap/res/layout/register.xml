@@ -60,7 +60,7 @@
 	    	android:layout_height="wrap_content"
 	    	android:layout_below="@id/register_password_edit"
 	    	android:layout_marginTop="3dp"
-	    	android:text="@string/login_label_checkpassword"
+	    	android:text="@string/check_password"
 	    	style="@style/normalText"/>
 	    <EditText 
 	    	android:id="@+id/register_check_edit"
