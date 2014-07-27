@@ -1,0 +1,81 @@
+package utils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
+public   class StorageUtil {
+	public static final String ICON_PATH ="image\\icon\\" ;
+	public static final String PIC_PATH ="image\\pic\\" ;
+	public static final String ICON_PATH_SQLDATA ="image/icon/" ;
+	public static final String PIC_PATH_SQLDATA ="image/pic/" ;
+	public static final String SERVICE_ADDRESS ="http://192.168.1.112:8080/foodmap/" ;
+	private static int count=0;
+	public static String getRootPath()
+	
+	{
+	    return ServletActionContext.getServletContext().getRealPath("/");	
+	}
+
+	
+
+	public String getServiceAddress()
+	{
+		return SERVICE_ADDRESS;
+	}
+	
+	public static String copyFile(String fileType,String fileData,String destDir) throws IOException
+	{
+		if(count>1000)
+		{
+		 count=0;
+		}
+		Date date = new Date();
+		String dirName = new SimpleDateFormat("yyyyMMdd").format(date);
+		String newFileName = new SimpleDateFormat("yyyyMMddHHmmss_SSS").format(date);
+		newFileName+=count+newFileName;
+		count++;
+		//destDir的值D:/apache-tomcat-6.0.36/webapps/chat/
+		String dirPath = destDir+dirName;
+		File dir = new File(dirPath);
+		if(!dir.exists()  && !dir.isDirectory())
+		{
+			//目录不存在，创建目录
+			dir.mkdir();
+		}
+		
+		String newFilePath = dirPath+"/"+newFileName+"."+fileType;
+		FileInputStream in=new FileInputStream(new File(fileData));
+		FileOutputStream out=new FileOutputStream(newFilePath);
+		int length=2097152;
+		byte[] buffer=new byte[length];
+		while(true){
+			int ins=in.read(buffer);
+			if(ins==-1){
+				in.close();
+				out.flush();
+				out.close();
+				return dirName+"/"+newFileName+"."+fileType;
+			}else
+				out.write(buffer,0,ins);
+		}
+	}
+
+	// 存入某张图片返回存储到的相对路径
+	public static String loadPic(String picData, String path) throws IOException {
+		String filePath = null;
+		String Type = "png";
+		String dir = getRootPath() + path;
+		filePath = copyFile(Type, picData, dir);
+		return filePath;
+	}
+
+
+}

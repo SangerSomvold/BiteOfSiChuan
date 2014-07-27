@@ -1,0 +1,235 @@
+package com.foomap.activity;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import android.R.string;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.os.ParcelFileDescriptor.OnCloseListener;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.foodmap.R;
+import com.foomap.model.*;
+import com.foomap.model.UserInfo.UserData;
+import com.foomap.util.DraftlvAdapter;
+import com.foomap.util.DraftsDbManager;
+import com.foomap.util.PersonalpageSwipeAdapter;
+import com.foomap.util.ShowPictureInfo;
+import com.foomap.view.BaseSwipeListViewListener;
+import com.foomap.view.SwipeListView;
+
+public class UsrInfoActivity extends Activity {
+	private SwipeListView mSwipeListView ;
+	private static final int RESULT_LOAD_IMAGE = 1;
+	private TextView Username;
+	String Usernamesting="default";
+	private PersonalpageSwipeAdapter mAdapter ;
+	public static int deviceWidth ;
+	private List<String> testData ;
+	public ImageButton backbtn, draftbtn, passwordchangebtn;
+	private List<String> mDrr = new ArrayList<String>();
+	private Bitmap mBitmap;
+	private ImageButton mImage;
+	
+	@   Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.personalpage_lv);
+		Username = (TextView) findViewById(R.id.ID);
+		//if(!getUsername().equals(null))
+		Usernamesting=getUsername();
+		Username.setText(Usernamesting);
+		mSwipeListView = (SwipeListView) findViewById(R.id.restauran_lv_list);
+		testData = getTestData();
+		mAdapter = new PersonalpageSwipeAdapter(this, R.layout.personalpagerow, testData,
+				mSwipeListView);
+		deviceWidth = getDeviceWidth();
+		mSwipeListView.setAdapter(mAdapter);
+		mSwipeListView
+				.setSwipeListViewListener(new TestBaseSwipeListViewListener());
+		reload();
+		mImage =(ImageButton)findViewById(R.id.Userpic);
+		
+		mImage.setOnClickListener(listener);
+		draftbtn = (ImageButton) findViewById(R.id.draft);
+		draftbtn.setOnClickListener(listener);
+		backbtn = (ImageButton) findViewById(R.id.personalpageback);
+		backbtn.setOnClickListener(listener);
+		passwordchangebtn = (ImageButton) findViewById(R.id.passwordchange);
+		passwordchangebtn.setOnClickListener(listener);
+	    
+       
+	}
+
+	private List<String> getTestData() {
+		String[] obj = new String[] { "大宅门火锅", "厕所串串", "利苑", "外婆的厨房", "醉赤壁",
+				"玉林串串", "蜀九香", "锦城印象", "明廷饭店", "奶茶", "雨田" };
+		/*String[] obj2 = new String[4];
+		DraftsDbManager ddm= new DraftsDbManager(getBaseContext());
+		Cursor cursor;
+		cursor=ddm.queryTheCursor();
+		int count=0;
+		while (cursor.moveToNext()&&count<=3) { 
+		    String muserId = cursor.getString(0); //获取第一列的值,第一列的索引从0开始 
+		    if(muserId.equals(getUsername()));
+		    {
+		    	String mname = cursor.getString(2);
+		    	obj2[count]=mname;
+		    	count++;
+		    }
+		} 
+		
+		//List<String> list = new ArrayList<String>(Arrays.asList(obj2));*/
+		List<String> list = new ArrayList<String>(Arrays.asList(obj));
+		return list;
+	}
+
+	private String getUsername()
+	{
+		String userID;
+		UserData usr= new UserData();
+		userID=usr.userId;
+	  
+		return userID;
+		
+		
+	}
+	private String getpassword()
+	{
+		String password;
+		UserData usr= new UserData();
+		password=usr.password;
+	  
+		return password;
+		
+		
+	}
+
+
+	private int getDeviceWidth() {
+		return getResources().getDisplayMetrics().widthPixels;
+	}
+
+	private void reload() {
+		mSwipeListView.setSwipeMode(SwipeListView.SWIPE_MODE_LEFT);
+		mSwipeListView.setSwipeActionLeft(SwipeListView.SWIPE_ACTION_REVEAL);
+
+		mSwipeListView.setOffsetLeft(deviceWidth * 1 / 3);
+
+		mSwipeListView.setAnimationTime(0);
+		mSwipeListView.setSwipeOpenOnLongPress(false);
+    }
+	
+	class TestBaseSwipeListViewListener extends BaseSwipeListViewListener{
+
+		@Override
+		public void onClickFrontView(int position) {
+			super.onClickFrontView(position);
+			Toast.makeText(getApplicationContext(), testData.get(position), Toast.LENGTH_SHORT).show();
+		}
+
+		@Override
+		public void onDismiss(int[] reverseSortedPositions) {
+			for (int position : reverseSortedPositions) {
+				testData.remove(position);
+			}
+			mAdapter.notifyDataSetChanged();
+		}
+		
+		
+	}
+	public void UserpicChange()
+	{
+		
+		
+		
+	}
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {	
+		case RESULT_LOAD_IMAGE:
+			if (resultCode == RESULT_OK && null != data) {
+				mDrr = (List<String>)data.getSerializableExtra("pictureUrl");
+				convertPicture();
+			break;
+			}
+		}
+	}
+	
+	private void convertPicture()
+	{
+		for (int i = 0; i < mDrr.size(); i++) {
+			 ShowPictureInfo info = new ShowPictureInfo();
+			 BitmapFactory.Options options = new BitmapFactory.Options();
+			 options.inJustDecodeBounds = true;
+			 options.inJustDecodeBounds = false;
+			 int be = options.outHeight/20;
+			 if (be <= 0) {
+				 be = 20;
+			 }
+			 options.inSampleSize = be;
+			 mBitmap = BitmapFactory.decodeFile(mDrr.get(i),options);  
+			 Bitmap img = null; 
+			 img = Bitmap.createScaledBitmap(mBitmap ,89,89, true); 
+			 mImage.setImageBitmap(img);
+			
+		}
+	}
+	
+	private OnClickListener listener = new OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			ImageButton btn = (ImageButton) v;
+			switch (btn.getId()) {
+			case R.id.Userpic:
+			{
+				Intent intent = new Intent(UsrInfoActivity.this,ShowPictureActivity.class);
+				startActivityForResult(intent,RESULT_LOAD_IMAGE);
+			break;}
+			case R.id.passwordchange:
+				{Intent intent = new Intent();
+				intent.setClass(UsrInfoActivity.this, PasswrodChangeActivity.class);
+
+				startActivity(intent);
+				onPause();
+
+				break;}
+			case R.id.personalpageback:
+			{Intent intent3 = new Intent();
+			intent3.setClass(UsrInfoActivity.this, MainActivity.class);
+
+			startActivity(intent3);
+			onPause();
+				break;}
+			
+			case R.id.draft:
+			{Intent intent2 = new Intent();
+			intent2.setClass(UsrInfoActivity.this, DraftActivity.class);
+
+			startActivity(intent2);
+			onPause();
+			break;}
+			default:
+				break;
+			}
+		}
+
+	};
+
+}

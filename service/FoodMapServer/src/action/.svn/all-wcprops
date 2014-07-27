@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/FoodMapServer/!svn/ver/77/FoodMapServer/src/action
+END
+TypeAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/FoodMapServer/!svn/ver/50/FoodMapServer/src/action/TypeAction.java
+END
+CommentAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/FoodMapServer/!svn/ver/80/FoodMapServer/src/action/CommentAction.java
+END
+ShopAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/FoodMapServer/!svn/ver/86/FoodMapServer/src/action/ShopAction.java
+END
+BaseAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/src/action/BaseAction.java
+END
+CollectionAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/FoodMapServer/!svn/ver/86/FoodMapServer/src/action/CollectionAction.java
+END
+UserAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/FoodMapServer/!svn/ver/86/FoodMapServer/src/action/UserAction.java
+END

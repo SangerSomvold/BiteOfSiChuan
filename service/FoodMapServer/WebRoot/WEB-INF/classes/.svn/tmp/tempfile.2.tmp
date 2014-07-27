@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<package name="user" namespace="/user" extends="json-default">
+		<default-interceptor-ref name="defaultStack" />
+		<action name="user_*" class="action.UserAction" method="{1}">
+			<result type="json"></result>
+		</action>
+	</package>
+
+	<package name="shop" namespace="/shop" extends="json-default">
+		<default-interceptor-ref name="defaultStack" />
+		<action name="data_get" class="action.ShopAction"  method="getData">
+			<result type="json"></result>
+		</action>
+		
+		<action name="data_fromKey" class="action.ShopAction"  method="searchKey">
+			<result type="json"></result>
+		</action>
+			<action name="data_all" class="action.ShopAction"  method="getAllData">
+			<result type="json"></result>
+		</action>
+	</package>
+
+	<package name="comment" namespace="/comment" extends="json-default">
+		<default-interceptor-ref name="defaultStack" />
+		<action name="comment_*" class="action.CommentAction" method="{1}">
+			<result type="json"></result>
+		</action>
+	</package>
+
+</struts>

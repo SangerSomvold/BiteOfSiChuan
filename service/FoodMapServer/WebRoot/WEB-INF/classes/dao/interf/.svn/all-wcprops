@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/FoodMapServer/!svn/ver/56/FoodMapServer/src/dao/interf
+END
+ICommentDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/FoodMapServer/!svn/ver/11/FoodMapServer/src/dao/interf/ICommentDAO.java
+END
+IShopDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/FoodMapServer/!svn/ver/7/FoodMapServer/src/dao/interf/IShopDAO.java
+END
+IBaseDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/FoodMapServer/!svn/ver/23/FoodMapServer/src/dao/interf/IBaseDAO.java
+END
+IPictureDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/FoodMapServer/!svn/ver/27/FoodMapServer/src/dao/interf/IPictureDAO.java
+END
+ICollectionDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/FoodMapServer/!svn/ver/56/FoodMapServer/src/dao/interf/ICollectionDAO.java
+END
+IUserDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/FoodMapServer/!svn/ver/3/FoodMapServer/src/dao/interf/IUserDAO.java
+END
+ITypeDAO.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/FoodMapServer/!svn/ver/50/FoodMapServer/src/dao/interf/ITypeDAO.java
+END

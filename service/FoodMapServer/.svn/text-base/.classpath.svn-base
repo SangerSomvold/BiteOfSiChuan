@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-httpclient-3.0.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jpa/eclipselink-jpa-modelgen_2.3.0.v20110604-r9504.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jpa/eclipselink.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jpa/javax.persistence_2.0.3.v201010191057.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jpa/mysql-connector-java-5.1.16-bin.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jpa/ojdbc14_g.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/json/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/json/commons-lang-2.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/json/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/json/json-jena-1.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/json/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql-connector-java-5.1.16-bin.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/pinyin4j-2.5.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/asm-3.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/asm-commons-3.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/asm-tree-3.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/commons-fileupload-1.2.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/commons-io-1.3.2.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/commons-pool-1.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/freemarker-2.3.15.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/mysql-connector-java-5.1.16-bin.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/ognl-2.7.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/struts2-core-2.1.8.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/struts2-json-plugin-2.1.8.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/struts2-sitemesh-plugin-2.1.8.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts/xwork-core-2.1.6.jar" sourcepath="C:/Users/Administrator/.m2/repository/com/opensymphony/xwork-core/2.1.6/xwork-core-2.1.6-sources.jar"/>
+	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
+</classpath>

@@ -1,0 +1,161 @@
+package com.foomap.service;
+
+/*
+ * 必须实现     IOnHttpRequeseListener接口 接受返回值  否则不执行异步请求
+ * 
+ * addComment 方法必须实现 ICommentAdapter接口  提供数据 否则不执行异步请求
+ */
+
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
+import android.util.Log;
+
+
+
+public class CommentHttpService extends HttpServiceHelper {
+	private static String TAG="CommentHttpService";
+
+	protected static final String BaseURL = "http://10.252.252.27:8080/foodmap/comment/";
+	protected static final String ACTION_ADD =BaseURL+ "comment_add";
+	protected static final String ACTION_GET_BY_ID =BaseURL+ "comment_byId";
+	//上传的评论数据
+     private ICommentAdapter adapter=null;
+
+     
+
+	// 获得评论数据
+	public void getComments(int shopId,int pageNumber,IOnHttpRequeseListener listener) {
+		setRequestListener(listener);
+		HashMap<String, String> map=new HashMap<String, String>();
+		map.put("shopId", shopId+"");
+		map.put("pageNumber", pageNumber+"");
+		get_Asyn(ACTION_GET_BY_ID, map);
+
+	}
+
+	// 添加评论
+	public void addComment(ICommentAdapter adapter) {
+		this.adapter=adapter;
+		if (adapter != null && adapter.getUserId() != null
+				&& adapter.getShopId() != 0) {
+			post_Asyn();
+
+		}
+	}
+
+	//---------post实现
+
+	@Override
+	protected String postMethod() {
+		// TODO Auto-generated method stub
+		String res="请求错误";
+	
+		try {
+			MultipartEntity postEntity=getPostEntity();
+			HttpClient client=new DefaultHttpClient();
+			HttpPost post=new HttpPost(ACTION_ADD);
+			post.setEntity(postEntity);
+			HttpResponse response=  client.execute(post);
+			res=EntityUtils.toString(response.getEntity(),encoding);
+			//关闭资源
+			client.getConnectionManager().shutdown();
+			
+			
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;	
+	}
+
+	// post参数组装
+	private MultipartEntity getPostEntity() {
+		MultipartEntity entity = new MultipartEntity();
+
+		try {
+			
+			
+			entity.addPart("comment", new StringBody(adapter.getComment(),Charset.forName(encoding)));
+			entity.addPart("shopId", new StringBody(adapter.getShopId() + "",Charset.forName(encoding)));
+			entity.addPart("grade", new StringBody(adapter.getGradeAvg() + "",Charset.forName(encoding)));
+			entity.addPart("datetime", new StringBody(adapter.getTime(),Charset.forName(encoding)));
+			entity.addPart("userId", new StringBody(adapter.getUserId() + "",Charset.forName(encoding)));
+			// 评论图片
+			List<String> list=adapter.getPicPaths();
+			if(list!=null)
+			{
+				
+				for(int i=0;i<list.size();i++)
+				{
+					Log.i(TAG, "------->"+list.get(i));
+					if(i==0)
+					{
+						File f=new File(list.get(0));
+						Log.i(TAG, f.length()+"");
+						entity.addPart("firstPicData",new FileBody(f));
+						
+						
+					/*	entity.addPart("firstPicData",
+								new FileBody(new File()));*/
+					}
+					else if(i==1)
+					{
+						entity.addPart("secondPicData",
+								new FileBody(new File(list.get(1))));
+					}
+					else	if(i==2)
+					{
+						entity.addPart("thirdPicData",
+								new FileBody(new File(list.get(2))));
+					}
+				}
+			}
+		
+
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return entity;
+	}
+	
+
+	
+
+	// 提供数据数据
+	public interface ICommentAdapter {
+		public String getUserId();
+
+		public int getShopId();
+
+		public String getTime();
+
+		public String getComment();
+
+		public double getCostAvg();
+
+		public double getGradeAvg();
+
+		public List<String> getPicPaths();
+	}
+
+}

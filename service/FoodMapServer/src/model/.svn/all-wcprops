@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/FoodMapServer/!svn/ver/76/FoodMapServer/src/model
+END
+MComment.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/FoodMapServer/!svn/ver/80/FoodMapServer/src/model/MComment.java
+END
+MShop.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/FoodMapServer/!svn/ver/86/FoodMapServer/src/model/MShop.java
+END
+MCollection.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/FoodMapServer/!svn/ver/56/FoodMapServer/src/model/MCollection.java
+END
+MUser.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/FoodMapServer/!svn/ver/62/FoodMapServer/src/model/MUser.java
+END
+MType.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/FoodMapServer/!svn/ver/53/FoodMapServer/src/model/MType.java
+END

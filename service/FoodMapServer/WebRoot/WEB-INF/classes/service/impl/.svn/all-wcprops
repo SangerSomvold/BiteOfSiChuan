@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/FoodMapServer/!svn/ver/77/FoodMapServer/src/service/impl
+END
+UserImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/FoodMapServer/!svn/ver/62/FoodMapServer/src/service/impl/UserImpl.java
+END
+TypeImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/FoodMapServer/!svn/ver/50/FoodMapServer/src/service/impl/TypeImpl.java
+END
+CommentImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/FoodMapServer/!svn/ver/80/FoodMapServer/src/service/impl/CommentImpl.java
+END
+ShopImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/FoodMapServer/!svn/ver/86/FoodMapServer/src/service/impl/ShopImpl.java
+END
+CollectionImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/FoodMapServer/!svn/ver/74/FoodMapServer/src/service/impl/CollectionImpl.java
+END

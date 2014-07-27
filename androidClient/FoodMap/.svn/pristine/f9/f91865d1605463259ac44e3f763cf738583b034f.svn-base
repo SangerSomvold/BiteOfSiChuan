@@ -1,0 +1,70 @@
+package com.foomap.util;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.util.Log;
+
+public class Compression {
+	public static File comPressionPic(String path)
+	{
+		File file=null;
+		Bitmap bit = BitmapFactory.decodeFile(path);
+		  float pc = (float) 100 / (float) bit.getWidth();//压缩比例
+		file=saveMyBitmap("tmp",  resize_img(bit, pc)) ;
+		return file;	
+	}
+
+	public Bitmap resizeImg(Bitmap b,float pc)
+	{
+		Bitmap resizeBmp = null;
+		return resizeBmp;
+	}
+	
+	//压缩bitmap
+	private static Bitmap resize_img(Bitmap bitmap, float pc) {
+	 
+	    Matrix matrix = new Matrix();
+	    Log.i("mylog2", "缩放比例--" + pc);
+	    matrix.postScale(pc, pc); // 长和宽放大缩小的比例
+	    Bitmap resizeBmp = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+	            bitmap.getHeight(), matrix, true);
+	 
+	    bitmap.recycle();
+	    bitmap = null;
+	    System.gc();
+	     
+	    int width = resizeBmp.getWidth();
+	    int height = resizeBmp.getHeight();
+	    Log.i("mylog2", "按比例缩小后宽度--" + width);
+	    Log.i("mylog2", "按比例缩小后高度--" + height);
+	 
+	    return resizeBmp;
+	}
+	
+	public static  File saveMyBitmap(String filename, Bitmap bit) {  
+	    File dir = new File("/sdcard/img_interim/");
+	    if (!dir.exists()) {
+	        dir.mkdir();
+	    }
+	    File f = new File("/sdcard/img_interim/" + filename);
+	    try {
+	        f.createNewFile();
+	        FileOutputStream fOut = null;
+	        fOut = new FileOutputStream(f);  
+	        bit.compress(Bitmap.CompressFormat.PNG, 100, fOut);
+	        fOut.flush();  
+	        fOut.close();  
+	    } catch (IOException e1) {
+	        // TODO Auto-generated catch block
+	        f = null;
+	        e1.printStackTrace();
+	    }    
+	    return f;
+	}
+
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="E:\Coding\WorkSpace\Android\FoodMap\build\intermediates\pre-dexed\debug\nineoldandroids-2.4.0-9dbda19794ab96d91dd0b8a6260a51a46d0c8f9b.jar"
+        jar="E:\Coding\WorkSpace\Android\FoodMap\libs\nineoldandroids-2.4.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="59f19e43354d32de831379c23ce03bb259a4c2b7"/>
+    <item
+        dex="E:\Coding\WorkSpace\Android\FoodMap\build\intermediates\pre-dexed\debug\android-support-v4-2e215c3da8fe68855ab82e221d42c001d5d2e630.jar"
+        jar="E:\Coding\WorkSpace\Android\FoodMap\libs\android-support-v4.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="612846c9857077a039b533718f72db3bc041d389"/>
+    <item
+        dex="E:\Coding\WorkSpace\Android\FoodMap\build\intermediates\pre-dexed\debug\locSDK_4.2-bf19b18d7ef65cd6d0a91ba65d93118b8a5f7739.jar"
+        jar="E:\Coding\WorkSpace\Android\FoodMap\libs\locSDK_4.2.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="41b93335a2753c93f8b8f56741615cb81ea72437"/>
+    <item
+        dex="E:\Coding\WorkSpace\Android\FoodMap\build\intermediates\pre-dexed\debug\httpmime-4.1.1-d839244da2ab5cd3dc1f1a4c82bbc8165bb9210c.jar"
+        jar="E:\Coding\WorkSpace\Android\FoodMap\libs\httpmime-4.1.1.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="d34b163e52a9727101aced60775d51c5085390a1"/>
+    <item
+        dex="E:\Coding\WorkSpace\Android\FoodMap\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.2-6273a6ad56f59537d38703f7abbe4d74204cee26.jar"
+        jar="E:\Coding\WorkSpace\Android\FoodMap\libs\universal-image-loader-1.9.2.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="9e025bc5b84968e7d6ac765e660a70b3e5a87432"/>
+    <item
+        dex="E:\Coding\WorkSpace\Android\FoodMap\build\intermediates\pre-dexed\debug\baidumapapi_v3_0_0-67d5b6ae981dac9f0dc2fa2f49ece3844289871d.jar"
+        jar="E:\Coding\WorkSpace\Android\FoodMap\libs\baidumapapi_v3_0_0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="bd3bb94af74ec7553c096a72a3f55d69766c24f7"/>
+
+</pre-dex-items>

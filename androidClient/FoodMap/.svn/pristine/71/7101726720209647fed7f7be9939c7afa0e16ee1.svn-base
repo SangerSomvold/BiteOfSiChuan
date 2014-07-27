@@ -1,0 +1,207 @@
+package com.foomap.activity;
+
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
+import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.model.LatLng;
+import com.foodmap.R;
+import com.foomap.service.CommentHttpService;
+import com.foomap.service.CommentHttpService.ICommentAdapter;
+import com.foomap.service.HttpServiceHelper.IOnHttpRequeseListener;
+import com.foomap.service.LocationSever;
+import com.foomap.service.UserHttpService;
+
+public class MapViewActivity extends Activity {
+	
+	private static String TAG="MapViewActivity";
+	private MapView mapView;
+	private BaiduMap map;
+	private Context context;
+	private Handler handler;
+	private LocationSever lc;
+	private Button bt;
+	
+
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		// ʼ�� SDK���õ�Context ȫ�ֱ�����
+		SDKInitializer.initialize(getApplicationContext());
+		setContentView(R.layout.mapview_activity);
+		this.context=this;
+
+		init();
+
+	}
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		mapView.onDestroy();
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		mapView.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		mapView.onResume();
+		
+		
+	}
+
+	// ===============================================================
+	protected void init() {
+		mapView = (MapView) findViewById(R.id.bmapView_mapView);
+		bt=(Button)findViewById(R.id.refrshMap_main);
+	/*	map = mapView.getMap();
+		lc=new LocationSever(getApplicationContext());
+
+		// ��ͨ��ͼ
+		map.setMapType(BaiduMap.MAP_TYPE_NORMAL);
+		updateUi();*/
+		bt.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				/*lc.requestLocation();
+				asynPosition();*/
+				CommentHttpService cHttpService=new CommentHttpService();
+				cHttpService.setRequestListener(new IOnHttpRequeseListener() {
+					
+					@Override
+					public void finished(String jsonRes) {
+						// TODO Auto-generated method stub
+						Log.i(TAG, jsonRes);
+						
+					}
+				});
+				cHttpService.addComment(new ICommentAdapter() {
+					
+					@Override
+					public String getUserId() {
+						// TODO Auto-generated method stub
+						return "chen";
+					}
+					
+					@Override
+					public String getTime() {
+						// TODO Auto-generated method stub
+						return "15:15����";
+					}
+					
+					@Override
+					public int getShopId() {
+						// TODO Auto-generated method stub
+						return 1000;
+					}
+					
+					@Override
+					public String[] getPicPaths() {
+						// TODO Auto-generated method stub
+						String[] s=new String[3] ;
+						
+						return s;
+					}
+					
+					@Override
+					public double getGradeAvg() {
+						// TODO Auto-generated method stub
+						return 4;
+					}
+					
+					@Override
+					public double getCostAvg() {
+						// TODO Auto-generated method stub
+						return 15;
+					}
+					
+					@Override
+					public String getComment() {
+						// TODO Auto-generated method stub
+						return "�������";
+					}
+				});
+                   
+                     
+			}
+		});
+		
+		
+		
+	}
+	public void setMapViewCenter(LatLng latLng)
+	{
+	   map.setMapStatus(MapStatusUpdateFactory.newLatLngZoom(latLng, 17));
+	
+	   ArrayList<LatLng> list=new ArrayList<LatLng>();
+	   list.add(latLng);
+	   addOverLayOption(list);
+	   
+	}
+	
+	public void updateUi()
+	{
+		handler=new Handler()
+		{
+			@Override
+			public void handleMessage(Message msg) {
+				// TODO Auto-generated method stub
+				//super.handleMessage(msg);
+				if(msg.what==0x30)
+				{
+			
+				
+					
+				  
+				}
+			}
+		};
+	}
+
+	public void addOverLayOption(ArrayList<LatLng> list) {
+		for (LatLng item : list) {
+			BitmapDescriptor bitmap=BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher);
+			OverlayOptions option=new MarkerOptions().position(item).icon(bitmap);
+			map.addOverlay(option);
+              
+		}
+	}
+
+	public class PoiItem {
+		float latitude;
+		float longitude;
+		String name;
+		
+	}
+
+	
+
+}

@@ -1,0 +1,30 @@
+package com.foomap.model;
+
+import java.util.Random;
+
+import com.foomap.view.KeywordsFlow;
+
+public class KeyWordData {
+	public KeyWordData() {
+
+	}
+
+	public static void feedKeywordsFlow(KeywordsFlow keywordsFlow, String[] arr) {
+		Random random = new Random();
+		for (int i = 0; i < KeywordsFlow.MAX; i++) {
+			int ran = random.nextInt(arr.length);
+			String tmp = arr[ran];
+			keywordsFlow.feedKeyword(tmp);
+		}
+	}
+
+	public static String[] getData() {
+		String[] res = new String[50];
+		for (int i = 0; i < 50; i++) {
+			res[i] = "this is " + i;
+		}
+
+		return res;
+	}
+
+}

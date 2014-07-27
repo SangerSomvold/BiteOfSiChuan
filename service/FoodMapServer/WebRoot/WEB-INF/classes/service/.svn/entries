@@ -1,0 +1,34 @@
+8
+
+dir
+77
+https://172.16.254.63/svn/FoodMapServer/FoodMapServer/src/service
+https://172.16.254.63/svn/FoodMapServer
+
+
+
+2014-07-17T03:10:50.643564Z
+77
+chenpeihan
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+ac11c346-8fc5-d44d-a8e9-44c7648dbc0c
+
+impl
+dir
+
+interf
+dir
+

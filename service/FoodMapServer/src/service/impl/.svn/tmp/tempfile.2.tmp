@@ -1,0 +1,205 @@
+package service.impl;
+
+import java.io.IOException;
+import java.util.List;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
+import dao.impl.PictureDAO;
+import dao.impl.ShopDao;
+import dao.impl.UserDAO;
+import dao.interf.IPictureDAO;
+import dao.interf.IShopDAO;
+import dao.interf.IUserDAO;
+import dao.pojo.Comment;
+import dao.pojo.Picture;
+import dao.pojo.Shop;
+import dao.pojo.User;
+import model.MShop;
+import service.interf.IShop;
+import utils.StorageUtil;
+
+public class ShopImpl implements IShop {
+	private IShopDAO sDAO = new ShopDao();
+	private final int TYPE_CREATE = 0;
+
+	public ShopImpl() {
+
+	}
+
+	// 获得分页数据
+	public JSONObject getAllShopData(MShop model) throws Exception {
+		// TODO Auto-generated method stub
+		JSONObject jsonObject = new JSONObject();
+		int pageNumber = model.getPageNumber();
+		int start = (pageNumber - 1) * 10;
+		int limit = pageNumber * 10;
+
+		List<Shop> shopList = sDAO.findAll(start, limit, null, null);
+		if (shopList != null) {
+			jsonObject.put("isExist", true);
+			jsonObject.element("shopList", getJSonArray(shopList));
+		} else {
+			jsonObject.put("isExist", false);
+		}
+
+		return jsonObject;
+	}
+
+	// 关键字搜索（Name）
+	public JSONObject searchByKey(MShop model) throws Exception {
+		// TODO Auto-generated method stub
+
+		JSONObject res = new JSONObject();
+		int pageNumber = model.getPageNumber();
+		int start = (pageNumber - 1) * 10;
+		int limit = pageNumber * 10;
+		String rule = "model.shopName = " + "'" + model.getShopName() + "'";
+
+		List<Shop> ShopList = sDAO.findAll(start, limit, rule, null);
+		if (ShopList == null) {
+			res.put("isExist", false);
+		} else {
+			res.put("isExist", true);
+			// 添加符合条件的商家
+			res.element("shopList", getJSonArray(ShopList));
+		}
+
+		return res;
+	}
+
+	// 添加
+	public void add(MShop model) throws Exception {
+		// TODO Auto-generated method stub
+
+		Shop shop = new Shop();
+		shop.setShopName(model.getShopName());
+		shop.setAddress(model.getAddress());
+		shop.setCostAvg(model.getCostAvg());
+		shop.setFeature(model.getFeature());
+		shop.setGradeAvg(model.getGradeAvg());
+		// 设置用户
+		User u = new User();
+		u.setUserId(model.getUserId());
+		shop.setUser(u);
+		// -------------图片
+		// icon
+		if (model.getIconData() != null) {
+			//相对路径
+			String iconUrl =  StorageUtil.ICON_PATH_SQLDATA
+					+ StorageUtil.loadPic(model.getIconData(), StorageUtil.ICON_PATH);
+			shop.setIconUrl(iconUrl);
+
+		}
+
+		// 图片
+		if (model.getFirstPicData() != null) {
+
+			shop.setIconUrl(StorageUtil.PIC_PATH_SQLDATA
+<<<<<<< .mine
+					+StorageUtil.loadPic(model.getFirstPicData(), StorageUtil.PIC_PATH));
+=======
+					+ StorageUtil.loadPic(model.getFirstPicData(), StorageUtil.PIC_PATH));
+>>>>>>> .r40
+		}
+		if (model.getSecondPicData() != null) {
+			shop.setIconUrl(StorageUtil.loadPic(StorageUtil.PIC_PATH_SQLDATA
+					+ model.getSecondPicData(), StorageUtil.PIC_PATH));
+		}
+		if (model.getThirdPicData() != null) {
+			shop.setIconUrl(StorageUtil.loadPic(StorageUtil.PIC_PATH_SQLDATA
+					+ model.getThirdPicData(), StorageUtil.PIC_PATH));
+		}
+
+		sDAO.save(shop);
+	}
+
+	// 类型搜索
+	public JSONObject searchByType(int typeId, MShop model) throws Exception {
+		// TODO Auto-generated method stub
+		JSONObject jsonObject = new JSONObject();
+		Shop shop = new Shop();
+		int pageNumber = model.getPageNumber();
+		int start = (pageNumber - 1) * 10;
+		int limit = pageNumber * 10;
+		String rule = "model.typeId = " + "'" + typeId + "'";
+		List<Shop> shoplist = sDAO.findAll(start, limit, rule, null);
+		if (shoplist == null) {
+			jsonObject.put("isExist", false);
+		} else {
+			jsonObject.put("isExist", true);
+			jsonObject.element("shopList", getJSonArray(shoplist));
+		}
+		return jsonObject;
+	}
+
+	// 某一店铺详细信息
+	public JSONObject getShopData(Shop shop) throws Exception {
+		// TODO Auto-generated method stub
+		JSONObject jsonData = new JSONObject();
+		IPictureDAO pDAO = new PictureDAO();
+
+		// 图片
+		JSONArray picArray = new JSONArray();
+
+		JSONObject latlong = new JSONObject();
+		// 基本信息
+		jsonData.put("name", shop.getShopName());
+		jsonData.put("id", shop.getShopId());
+		jsonData.put("address", shop.getAddress());
+
+		jsonData.put("costAvg", shop.getCostAvg());
+		jsonData.put("gradeAvg", shop.getGradeAvg());
+		jsonData.put("createUserId", shop.getUser().getUserId());
+		jsonData.put("feature", shop.getFeature());
+		// icon
+		jsonData.put("iconUri", StorageUtil.SERVICE_ADDRESS
+				+shop.getIconUrl());
+		// 经纬度
+		latlong.put("latitude", shop.getLat());
+		latlong.put("longitude", shop.getLng());
+		jsonData.put("latlong", latlong);
+		// 商户图片(创建的)
+		String rule = "model.id =" + shop.getShopId() + " AND model.type="
+				+ TYPE_CREATE;
+		System.out.print(rule);
+		List<Picture> picList = pDAO.findAll(0, 10, rule, null);
+		for (Picture p : picList) {
+			picArray.add(p.getPicUrl());
+		}
+
+		jsonData.element("picUri", picArray);
+
+		return jsonData;
+	}
+
+	// 将获得的shop列表组装成带有详细信息的列表
+	protected JSONArray getJSonArray(List<Shop> list) throws Exception {
+		JSONArray jsonArray = new JSONArray();
+		for (Shop shop : list) {
+			JSONObject shopItem = getShopData(shop);
+			jsonArray.add(shopItem);
+		}
+		return jsonArray;
+	}
+
+	// 根据id寻找特定店铺
+	public JSONObject searchById(MShop model) throws Exception {
+		// TODO Auto-generated method stub
+		JSONObject jsonObject = new JSONObject();
+		Shop shop = sDAO.findById(model.getShopId());
+		if (shop == null) {
+			jsonObject.put("isExist", false);
+		} else {
+			jsonObject.put("isExist", true);
+			jsonObject.put("info", getShopData(shop));
+		}
+		return jsonObject;
+	}
+
+<<<<<<< .mine
+	
+=======
+>>>>>>> .r40
+}

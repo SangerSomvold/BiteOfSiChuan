@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/FoodMapServer/!svn/ver/6/FoodMapServer/.settings
+END
+org.eclipse.jdt.core.prefs
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/.settings/org.eclipse.jdt.core.prefs
+END
+com.genuitec.eclipse.j2eedt.core.prefs
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/.settings/com.genuitec.eclipse.j2eedt.core.prefs
+END
+org.eclipse.core.resources.prefs
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/.settings/org.eclipse.core.resources.prefs
+END
+com.genuitec.eclipse.persistence.jpa.prefs
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/FoodMapServer/!svn/ver/6/FoodMapServer/.settings/com.genuitec.eclipse.persistence.jpa.prefs
+END

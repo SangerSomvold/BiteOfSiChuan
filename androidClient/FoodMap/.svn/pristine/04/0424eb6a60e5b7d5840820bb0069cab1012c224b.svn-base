@@ -1,0 +1,195 @@
+package com.foomap.activity;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.foodmap.R;
+import com.foomap.model.ShopData;
+import com.foomap.pulltorefresh.library.PullToRefreshBase;
+import com.foomap.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.foomap.pulltorefresh.library.PullToRefreshListView;
+import com.foomap.service.HttpServiceHelper.IOnHttpRequeseListener;
+import com.foomap.service.ShophttpService;
+import com.foomap.util.SearchResultListAdapter;
+import com.foomap.util.ShopJsonUtils;
+import com.foomap.view.SearchResultPopClassifyWindow;
+import com.foomap.view.SearchResultPopLocationWindow;
+import com.foomap.view.SearchResultPopSortWindow;
+
+public class SearchResultActivity extends Activity implements OnClickListener {
+
+	private TextView mMyPlace;
+	private ImageButton mIbMap, mIbClassify, mIbLocation, mIbRank, mIbBack;
+	private SearchResultPopClassifyWindow mPwClassify;
+	private SearchResultPopLocationWindow mPwLocation;
+	private SearchResultPopSortWindow mPwSort;
+	private PullToRefreshListView mLvMain;
+	private SearchResultListAdapter myAdapter;
+	private ShophttpService mShs;
+	private int mPagerNum;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+
+		super.onCreate(savedInstanceState);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.sr_rl_main);
+
+		mPagerNum = 1;
+		mLvMain = (PullToRefreshListView) findViewById(R.id.lvSrList);
+		mLvMain.setMode(com.foomap.pulltorefresh.library.PullToRefreshBase.Mode.PULL_FROM_END);
+
+		mMyPlace = (TextView) findViewById(R.id.tvSrMyPlace);
+		mIbMap = (ImageButton) findViewById(R.id.ibSrMap);
+		mIbClassify = (ImageButton) findViewById(R.id.ibSrClassify);
+		mIbLocation = (ImageButton) findViewById(R.id.ibSrLocation);
+		mIbRank = (ImageButton) findViewById(R.id.ibSrRank);
+		mIbBack = (ImageButton) findViewById(R.id.ibSrBack);
+
+		mPwClassify = new SearchResultPopClassifyWindow(
+				SearchResultActivity.this);
+		mPwLocation = new SearchResultPopLocationWindow(
+				SearchResultActivity.this);
+		mPwSort = new SearchResultPopSortWindow(SearchResultActivity.this);
+
+		initListenner();
+
+		mMyPlace.setText("四川省成都市武侯区四川大学望江校区北门");
+		myAdapter = new SearchResultListAdapter(SearchResultActivity.this);
+
+		if (update()) {
+			mLvMain.setAdapter(myAdapter);
+		}
+
+	}
+
+	private void initListenner() {
+		mIbMap.setOnClickListener(this);
+		mIbClassify.setOnClickListener(this);
+		mIbLocation.setOnClickListener(this);
+		mIbRank.setOnClickListener(this);
+		mIbBack.setOnClickListener(this);
+		class GetDataTask extends AsyncTask<Void, Void, String[]> {
+			@Override
+			protected void onPostExecute(String[] result) {
+				super.onPostExecute(result);
+				update();
+			}
+
+			@Override
+			protected String[] doInBackground(Void... arg0) {
+				return null;
+			}
+		}
+		mLvMain.setOnRefreshListener(new OnRefreshListener<ListView>() {
+
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				new GetDataTask().execute();
+			}
+		});
+		mLvMain.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent intent = new Intent();
+
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("shopData",
+						myAdapter.mShopList.get(arg2 - 1).id);
+				intent.putExtras(bundle);
+				intent.setClass(SearchResultActivity.this,
+						PoiDetailActivity.class);
+				startActivity(intent);
+			}
+		});
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.ibSrMap:
+			Intent intent = new Intent();
+			startActivity(intent.setClass(this, MapViewActivity.class));
+			break;
+		case R.id.tvSrMyPlace:
+			break;
+		case R.id.ibSrClassify:
+			mPwClassify = new SearchResultPopClassifyWindow(
+					SearchResultActivity.this);
+			mPwClassify.showAtLocation(v, Gravity.TOP, 0, 0);
+			break;
+		case R.id.ibSrLocation:
+			mPwLocation = new SearchResultPopLocationWindow(
+					SearchResultActivity.this);
+			mPwLocation.showAtLocation(v, Gravity.TOP, 0, 0);
+			break;
+		case R.id.ibSrRank:
+			mPwSort = new SearchResultPopSortWindow(SearchResultActivity.this);
+			mPwSort.showAtLocation(v, Gravity.TOP, 0, 0);
+			break;
+		case R.id.ibSrBack:
+			finish();
+			break;
+		}
+	}
+
+	public boolean update() {
+		if (isNetworkConnected(this)) {
+			mShs = new ShophttpService();
+			mShs.getAllData(mPagerNum, new IOnHttpRequeseListener() {
+
+				@Override
+				public void finished(String jsonRes) {
+					ArrayList<ShopData> srShopList = ShopJsonUtils
+							.getDataList(jsonRes);
+					myAdapter.mShopList.addAll(srShopList);
+					myAdapter.notifyDataSetChanged();
+					if (1 == mPagerNum) {
+						findViewById(R.id.pbSrRefresh).setVisibility(View.GONE);
+					}
+					mLvMain.onRefreshComplete();
+					mPagerNum++;
+				}
+			});
+			return true;
+		} else {
+			Toast.makeText(SearchResultActivity.this, "请连接网络",
+					Toast.LENGTH_SHORT).show();
+			mLvMain.onRefreshComplete();
+			return false;
+		}
+
+	}
+
+	public boolean isNetworkConnected(Context context) {
+		if (context != null) {
+			ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo mNetworkInfo = mConnectivityManager
+					.getActiveNetworkInfo();
+			if (mNetworkInfo != null) {
+				return mNetworkInfo.isAvailable();
+			}
+		}
+		return false;
+	}
+}

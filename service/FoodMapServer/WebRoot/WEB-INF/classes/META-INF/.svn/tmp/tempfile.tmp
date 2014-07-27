@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+    http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
+    
+	<persistence-unit name="FoodMapServerPU"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>
+			org.eclipse.persistence.jpa.PersistenceProvider
+		</provider>
+		<class>dao.pojo.User</class>
+		<class>dao.pojo.Collection</class>
+		<class>dao.pojo.Comment</class>
+		<class>dao.pojo.Picutre</class>
+		<class>dao.pojo.Shop</class>
+		<class>dao.pojo.Type</class>
+		<properties>
+			<property name="eclipselink.jdbc.driver"
+				value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.jdbc.url"
+				value="jdbc:mysql://10.252.252.27:3306/foodmap" />
+			<property name="eclipselink.jdbc.user" value="root" />
+			<property name="eclipselink.jdbc.password" value="123" />
+		</properties>
+	</persistence-unit>
+
+</persistence>

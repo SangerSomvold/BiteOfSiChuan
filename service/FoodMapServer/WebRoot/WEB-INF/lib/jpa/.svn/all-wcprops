@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/WebRoot/WEB-INF/lib/jpa
+END
+eclipselink-jpa-modelgen_2.3.0.v20110604-r9504.jar
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/WebRoot/WEB-INF/lib/jpa/eclipselink-jpa-modelgen_2.3.0.v20110604-r9504.jar
+END
+mysql-connector-java-5.1.16-bin.jar
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/WebRoot/WEB-INF/lib/jpa/mysql-connector-java-5.1.16-bin.jar
+END
+javax.persistence_2.0.3.v201010191057.jar
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/WebRoot/WEB-INF/lib/jpa/javax.persistence_2.0.3.v201010191057.jar
+END
+ojdbc14_g.jar
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/WebRoot/WEB-INF/lib/jpa/ojdbc14_g.jar
+END
+eclipselink.jar
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/WebRoot/WEB-INF/lib/jpa/eclipselink.jar
+END

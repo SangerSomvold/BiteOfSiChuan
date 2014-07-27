@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<package name="user" namespace="/user" extends="json-default">
+		<default-interceptor-ref name="defaultStack" />
+		<action name="user_*" class="action.UserAction" method="{1}">
+			<result type="json"></result>
+		</action>
+	</package>
+
+	<package name="shop" namespace="/shop" extends="json-default">
+		<default-interceptor-ref name="defaultStack" />
+		<action name="data_byKey" class="action.ShopAction" method="getDataByKey">
+			<result type="json"></result>
+		</action>
+		<action name="data_all" class="action.ShopAction" method="getAllData">
+			<result type="json"></result>
+		</action>
+
+		<action name="data_add" class="action.ShopAction" method="addShop">
+			<result type="json"></result>
+		</action>
+		<action name="data_byId" class="action.ShopAction" method="getDataById">
+			<result type="json"></result>
+		</action>
+		<action name="data_byType" class="action.ShopAction" method="getDataByType">
+			<result type="json"></result>
+		</action>
+	</package>
+	
+	
+	<package name="comment" namespace="/comment" extends="json-default">
+		<default-interceptor-ref name="defaultStack" />
+		
+
+<<<<<<< .mine
+=======
+		<action name="comment_add" class="action.CommentAction" method="add">
+			<result type="json"></result>
+		</action>
+		<action name="comment_byId" class="action.CommentAction" method="searchById">
+			<result type="json"></result>
+		</action>
+		
+	</package>
+	
+
+	<!-- 上传图片设置 -->
+	<package name="uploadaction" namespace="/up"  extends="struts-default">
+		<action name="upload" class="action.UploadAction">
+			<!-- 动态设置Action的属性值 -->
+			<param name="savePath">/upload</param>
+			<result name="success">/index.jsp</result>
+		</action>
+	</package>
+>>>>>>> .r34
+
+
+
+
+
+
+
+</struts>

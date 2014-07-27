@@ -1,0 +1,216 @@
+/*
+MySQL Data Transfer
+Source Host: 10.252.252.27
+Source Database: foodmap
+Target Host: 10.252.252.27
+Target Database: foodmap
+Date: 2014-7-17 17:03:36
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+-- ----------------------------
+-- Table structure for collection
+-- ----------------------------
+CREATE TABLE `collection` (
+  `collection_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(50) NOT NULL DEFAULT '',
+  `shop_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`collection_id`),
+  KEY `fk` (`user_id`),
+  KEY `shop_id` (`shop_id`),
+  CONSTRAINT `collection_ibfk_1` FOREIGN KEY (`shop_id`) REFERENCES `shop` (`shop_id`),
+  CONSTRAINT `fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for comment
+-- ----------------------------
+CREATE TABLE `comment` (
+  `comment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `shop_id` int(11) DEFAULT NULL,
+  `grade` float(10,0) DEFAULT NULL,
+  `user_id` varchar(50) DEFAULT '',
+  `datetime` varchar(255) DEFAULT '',
+  `comment` text,
+  `cost` int(11) DEFAULT NULL,
+  PRIMARY KEY (`comment_id`),
+  KEY `shop_id` (`shop_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`shop_id`) REFERENCES `shop` (`shop_id`),
+  CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for picture
+-- ----------------------------
+CREATE TABLE `picture` (
+  `pic_id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` int(11) DEFAULT NULL,
+  `pic_url` varchar(200) DEFAULT NULL,
+  `id` int(11) DEFAULT NULL,
+  `user_id` varchar(50) DEFAULT NULL,
+  `datetime` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`pic_id`),
+  KEY `fk_picture_comment` (`type`)
+) ENGINE=InnoDB AUTO_INCREMENT=1097 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for shop
+-- ----------------------------
+CREATE TABLE `shop` (
+  `shop_id` int(50) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(50) DEFAULT '',
+  `shop_name` varchar(50) DEFAULT NULL,
+  `icon_url` varchar(200) DEFAULT NULL,
+  `lng` double DEFAULT NULL,
+  `lat` double DEFAULT NULL,
+  `address` varchar(50) DEFAULT NULL,
+  `feature` text,
+  `grade_avg` double DEFAULT NULL,
+  `cost_avg` double DEFAULT NULL,
+  `type_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`shop_id`),
+  KEY `user_id` (`user_id`),
+  KEY `type_id` (`type_id`),
+  CONSTRAINT `shop_ibfk_3` FOREIGN KEY (`type_id`) REFERENCES `type` (`type_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `shop_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1088 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for type
+-- ----------------------------
+CREATE TABLE `type` (
+  `type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+CREATE TABLE `user` (
+  `user_id` varchar(50) NOT NULL DEFAULT '',
+  `user_name` varchar(50) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records 
+-- ----------------------------
+INSERT INTO `collection` VALUES ('3', 'stu', '1001');
+INSERT INTO `collection` VALUES ('39', 'fancy', '1009');
+INSERT INTO `collection` VALUES ('40', 'sanger', '1000');
+INSERT INTO `collection` VALUES ('41', 'sanger', '1004');
+INSERT INTO `collection` VALUES ('42', 'sanger', '1039');
+INSERT INTO `collection` VALUES ('47', 'chen', '1033');
+INSERT INTO `comment` VALUES ('1', '1000', '2', 'stu', '20140625', 'this ', '100');
+INSERT INTO `comment` VALUES ('2', '1000', '2', 'sanger', '20130731', 'good', '332');
+INSERT INTO `comment` VALUES ('3', '1000', '2', 'sb', '20140102', 'good', '123');
+INSERT INTO `comment` VALUES ('4', '1002', '3', 'stu', '20140608', 'good', '12312');
+INSERT INTO `comment` VALUES ('5', '1000', '2', 'ning', '20140629', 'good', '541');
+INSERT INTO `comment` VALUES ('6', '1000', '2', 'stu', '20140322', 'good', '45');
+INSERT INTO `comment` VALUES ('7', '1000', '4', 'admin', '20131211', '????', '123');
+INSERT INTO `comment` VALUES ('9', '1000', '2', 'stu', '20131111', 'good', '345');
+INSERT INTO `comment` VALUES ('10', '1000', '2', 'fancy', '20130212', 'bad', '450');
+INSERT INTO `comment` VALUES ('11', '1000', '4', 'zaza', '20131023', 'lalalalalalllalalalaalal', '4560');
+INSERT INTO `comment` VALUES ('12', '1000', '4', 'chen', '20140401', '测试数据', '456');
+INSERT INTO `comment` VALUES ('50', '1000', '3', 'sanger', '2014-07-16-01-22', '那么快', '0');
+INSERT INTO `comment` VALUES ('51', '1008', '4', 'admin', '2014-07-17-02-00', '海景酒店放', '0');
+INSERT INTO `comment` VALUES ('52', '1008', '5', 'admin', '2014-07-17-02-01', 'v那地方版本', '0');
+INSERT INTO `comment` VALUES ('53', '1008', '4', 'admin', '2014-07-17-02-04', '国家局高', '0');
+INSERT INTO `comment` VALUES ('54', '1008', '5', 'admin', '2014-07-17-02-06', 'vv哈', '0');
+INSERT INTO `comment` VALUES ('55', '1008', '4', 'admin', '2014-07-17-02-08', '白白净净', '0');
+INSERT INTO `comment` VALUES ('56', '1008', '5', 'admin', '2014-07-17-02-12', '不好解决', '0');
+INSERT INTO `comment` VALUES ('57', '1008', '4', 'admin', '2014-07-17-02-16', '干活', '0');
+INSERT INTO `comment` VALUES ('58', '1008', '4', 'admin', '2014-07-17-02-18', '刚刚给', '0');
+INSERT INTO `comment` VALUES ('59', '1008', '3', 'admin', '2014-07-17-02-20', 'BB呢', '0');
+INSERT INTO `comment` VALUES ('60', '1008', '2', 'admin', '2014-07-17-02-24', 'v你妈妈', '0');
+INSERT INTO `comment` VALUES ('61', '1008', '4', 'admin', '2014-07-17-02-27', 'VB不能', '0');
+INSERT INTO `comment` VALUES ('62', '1008', '4', 'admin', '2014-07-17-02-28', 'VB就', '0');
+INSERT INTO `comment` VALUES ('63', '1008', '5', 'admin', '2014-07-17-02-31', '共和横街', '0');
+INSERT INTO `picture` VALUES ('1002', '1', 'image/pic/huangjiadachushuijingliaoli.jpg', '1000', 'stu', '2014-03-22-05-10');
+INSERT INTO `picture` VALUES ('1003', '1', 'image/pic/huangjihuang.jpg', '1000', 'stu', '2013-11-11-05-33');
+INSERT INTO `picture` VALUES ('1004', '1', 'image/pic/jinjixianglaxiepapaxia.jpg', '1000', 'fancy', '2013-02-12-05-01');
+INSERT INTO `picture` VALUES ('1005', '1', 'image/pic/laogeminghuoguo.jpg', '1000', 'sb', '201-401-02-05-22');
+INSERT INTO `picture` VALUES ('1006', '1', 'image/pic/sulaimanzhuafan.jpg', '1000', 'admin', '2013-12-11-05-11');
+INSERT INTO `picture` VALUES ('1008', '1', 'image/pic/tongdingxianghuoguoxiang.jpg', '1000', 'admin', '2014-06-08-05-31');
+INSERT INTO `picture` VALUES ('1009', '1', 'image/pic/tongdingxianghuoguoxiang.jpg', '1000', 'admin', '2013-12-11-05-32');
+INSERT INTO `picture` VALUES ('1096', '0', 'image/pic/20140717/20140717163926_640320140717163926_640.png', null, 'admin', '2014-07-17-04-38');
+INSERT INTO `shop` VALUES ('1000', 'admin', '川城火锅', 'image/icon/chuanchenghuoguo.jpg', '104.07968', '30.64108', '成都市武侯区磨子桥旅游村街省军区综合楼二楼', '锅底独到 服务人员热情 价格实惠', '4', '16', '1');
+INSERT INTO `shop` VALUES ('1001', 'admin', '锦记香辣蟹爬爬虾', 'image/icon/jinjixianglaxiepapaxia.jpg', '104.082488', '30.638665', '成都市武侯区科华北路8号附10号', '爬爬虾 干锅黄喉', '3', '69', '3');
+INSERT INTO `shop` VALUES ('1002', 'admin', '鼎味三汁焖锅', 'image/icon/dingweisanzhimenguo.jpg', '104.088435', '30.642502', '成都市武侯区一环路南一段9号(近红瓦寺)', '排骨锅 海底捞', '4', '46', '1');
+INSERT INTO `shop` VALUES ('1003', 'admin', '黄记煌(一环路店)', 'image/icon/huangjihuang.jpg', '104.08814', '30.64237', '成都市锦江区一环路南一段9号1楼附10号(近维多利亚女子医院)', '牛肉 鸡腿肉 扯面', '4', '63', '1');
+INSERT INTO `shop` VALUES ('1004', 'admin', '铜鼎香火锅厅', 'image/icon/tongdingxianghuoguoxiang.jpg', '104.08308', '30.636754', '成都市武侯区科华北路59号', '锅底 牛肉 海带', '4', '51', '1');
+INSERT INTO `shop` VALUES ('1005', 'admin', '老革命火锅', 'image/icon/laogeminghuoguo.jpg', '104.087639', '30.641663', '成都市武侯区一环路南一段普利大厦一楼20号(维多利亚女子医院对面)', '大刀牛肉 嫩牛肉', '4', '55', '1');
+INSERT INTO `shop` VALUES ('1006', 'admin', '苏莱曼抓饭', 'image/icon/sulaimanzhuafan.jpg', '104.087688', '30.642238', '成都市武侯区民主路18号附14号', '抓饭 酸奶 羊肉串', '4', '26', '3');
+INSERT INTO `shop` VALUES ('1007', 'admin', '西域风情', 'image/icon/xiyufengqing.jpg', '104.088096', '30.642315', '成都市武侯区一环路南一段9号凯悦新城负一楼8号', '丁丁炒面 碎肉拌面 ', '4', '32', '3');
+INSERT INTO `shop` VALUES ('1008', 'admin', '巷子肥肠', 'image/icon/xiangzifeichang.jpg', '104.082025', '30.638377', '成都市武侯区一环路南二段磨子桥科华巷(汇川鱼馆对面)', '豆汤饭 肥肠豆汤 卤肥肠 ', '3.5', '23', '5');
+INSERT INTO `shop` VALUES ('1009', 'admin', '皇家大厨水晶料理', 'image/icon/huangjiadachushuijingliaoli.jpg', '104.082204', '30.638898', '成都市武侯区磨子桥科华路4号（新世纪电脑城旁）', '水晶芋儿鸡 水晶牛肉汤 水晶菌锅汤', '4', '36', '6');
+INSERT INTO `shop` VALUES ('1010', 'admin', '灶王酒店', 'image/icon/zaowangjiudian.jpg', '104.073577', '30.634827', '成都市武侯区人民南路四段11号(近1号地铁省体育馆站C口处)', '红烧肉 香芋肉松球', '4', '47', '5');
+INSERT INTO `shop` VALUES ('1011', 'admin', '陶然居', 'image/icon/taoranju.jpg', '104.072673', '30.634408', '成都市武侯区人民南路四段12号华宇蓉国府6号楼1-4楼（省体育馆斜对面）', '顶新醉鹅肝', '3.5', '95', '5');
+INSERT INTO `shop` VALUES ('1012', 'admin', '驰走三昧', 'image/icon/chizousanwei.jpg', '104.073616', '30.638012', '成都市武侯区人民南路四段3号来福士广场2层2019/2020', '天妇罗 三文鱼刺身 香蕉巧克力松饼', '4', '154', '6');
+INSERT INTO `shop` VALUES ('1013', 'admin', '千香引(林荫街店)', 'image/icon/qianxiangyin.jpg', '104.075754', '30.643605', '成都武侯区林荫街8号附5号(近华西保健医院大门) \r\n\r\n', '小煎鸡 鲜锅兔', '3.1', '33', '2');
+INSERT INTO `shop` VALUES ('1014', 'admin', '大海湾酒楼', 'image/icon/dahaiwanjiulou.jpg', '104.073333', '30.643131', '人民南路三段29号附1号 \r\n\r\n', '虾饺 丸子 牛肉丸', '3', '47', '7');
+INSERT INTO `shop` VALUES ('1015', 'admin', '新疆味(总店)', 'image/icon/xinjiangwei.jpg', '104.076063', '30.648646', '成都武侯区大学路(近华西校门) \r\n', '丁丁炒面 大盘鸡 羊肉串', '3', '20', '3');
+INSERT INTO `shop` VALUES ('1016', 'admin', '上古万州烤鱼干锅馆(林荫街店)', 'image/icon/shangguwanzhoukaoyuganguoguan.jpg', '104.07546', '30.643597', '四川省成都市武侯区林荫街8号附7号 \r\n', '金牌烤鱼', '3', '45', '5');
+INSERT INTO `shop` VALUES ('1017', 'admin', '吴铭火锅(双建路店)', 'image/icon/wuminghuoguo.jpg', '104.122601', '30.684143', '成都市成华区八里小区双建南路1号附1号(建设北路三段口)', '肥牛 日本豆腐 鱼饺', '4', '59', '1');
+INSERT INTO `shop` VALUES ('1018', 'admin', '宽坝子花园火锅(建设店)', 'image/icon/kuanbazi.jpg', '104.125069', '30.683918', '成都市成华区建设北路三段168号', '麻辣牛肉 酥炸水晶虾', '4', '70', '1');
+INSERT INTO `shop` VALUES ('1019', 'sanger', '蜀江春(科华分店)', 'image/icon/shujiangchun.jpg', '104.083287', '30.633864', '成都市武侯区科华北路109号(近四川大学西门)', '专业大厨烹制，味型多样，麻辣柔和，鲜香嫩滑，回味悠长，老少皆宜，欢迎前来品尝！提供免费WiFi！', '4', '57', '1');
+INSERT INTO `shop` VALUES ('1020', 'sanger', '金广阔自助海鲜烤肉', 'image/icon/jinguangkuozizhu.jpg', '104.0833', '30.633608', '成都市武侯区科华北路113号2楼（川大西校门旁青汤麻辣楼上）	', '仅售49.9元，价值89元单人自助烤肉午餐！精选新鲜优质食材、菜品经典美味、地中海风格装修、清新、简洁、淳朴、浪漫的用餐环境！店内提供免费WIFI！', '4', '59', '10');
+INSERT INTO `shop` VALUES ('1021', 'sanger', '自贡好吃客(科华店)', 'image/icon/zigonghaochike.jpg', '104.08331', '30.634245', '成都市武侯区科华北路101号(近川大西门)	', '极品跳水蛙，超级自贡菜！', '4', '68', '8');
+INSERT INTO `shop` VALUES ('1022', 'sanger', '祖母的厨房(科华总店)', 'image/icon/zumudechufang.jpg', '104.08392', '30.629459', '成都市武侯区科华北路143号蓝色加勒比广场2楼(近四川大学南门)	\r\n', '经典西餐，爵士蓝调，给你不一样的异域风情', '4', '80', '4');
+INSERT INTO `shop` VALUES ('1023', 'sanger', '巴贝拉意式休闲餐厅(科华路王府井店)', 'image/icon/babeilacanting.jpg', '104.082949', '30.625551', '成都市武侯区科华中路2号王府井购物中心成都二号店4层1号	', '至尊披萨！披萨之王！', '5', '43', '4');
+INSERT INTO `shop` VALUES ('1024', 'sanger', '彼德西餐厅(科华店)', 'image/icon/bidexicanting.jpg', '104.083221', '30.633499', '成都市武侯区科华北路117号(四川大学西门旁)	', '墨西哥菜美国菜意大利面', '4.5', '73', '4');
+INSERT INTO `shop` VALUES ('1025', 'sanger', '锅锅香(科华北路店)', 'image/icon/guoguoxiang.jpg', '104.082115', '30.629879', '成都市武侯区科华北路60号SOHO沸城112号力宝大厦对面	', '部门聚餐，聚划算。。味道一如既往，必须点赞哟!', '4.6', '51', '2');
+INSERT INTO `shop` VALUES ('1026', 'sanger', '西域风情', 'image/icon/yiyufengqing.jpg', '104.088096', '30.642315', '成都市武侯区一环路南一段9号凯悦新城负一楼8号(维多利亚女子医院旁)	', '麻辣劲道的鸡肉和软糯甜润的土豆加上爽滑筋道的宽面', '4', '32', '3');
+INSERT INTO `shop` VALUES ('1027', 'sanger', '新疆传统手抓饭', 'image/icon/xinjiangchuantongshouzhuafan.jpg', '104.088402', '30.642642', '一环路南一段9号红瓦寺凯悦新城1-22号（近动感地带旗舰店）', '团购跟正价消费菜量一样，这个价很实惠！', '3.5', '38', '3');
+INSERT INTO `shop` VALUES ('1028', 'sanger', '清真兰州拉面磨子桥店', 'image/icon/lanzhoulamian.jpg', '104.082343', '30.640777', '成都市武侯区新南路(近佰腾数码广场)	', '各种拉面炒面，还有大盘鸡之类的西北特色菜', '3', '21', '3');
+INSERT INTO `shop` VALUES ('1029', 'sanger', '龙七对麻将火锅串串', 'image/icon/longqiduimajiang.jpg', '104.081535', '30.631642', '成都市武侯区棕竹街美领事馆美食区巷内(好又多对面)	', '是家以麻将为主题的火锅串串！很有创意', '3.5', '30', '5');
+INSERT INTO `shop` VALUES ('1030', 'sanger', '袁记串串香(南台路店)', 'image/icon/yuanjichuanchuanxiangnan.jpg', '104.080242', '30.648786', '新南门南台路8号（出城方向新南门国美电器右转的南台路）	', '不俗的火锅底料，超值的串串', '3.5', '39', '5');
+INSERT INTO `shop` VALUES ('1031', 'sanger', '玉林串串香(川大店)', 'image/icon/yulinchuanchuanxiangchuan.jpg', '104.086537', '30.629816', '成都武侯区郭家桥(近四川大学南门)	', '吃的很爽，很过瘾，菜也很新鲜，口味真的很好', '5', '50', '5');
+INSERT INTO `shop` VALUES ('1032', 'sanger', '麦当劳(科华店)', 'image/icon/maidanglaokehua.jpg', '104.082819', '30.630586', '武侯区科华北路58号亚太广场A栋1-2楼(近好又多)	', '麦当劳，全球品牌，值得信赖', '4', '18', '6');
+INSERT INTO `shop` VALUES ('1033', 'sanger', '福乐永和豆浆(科华北路店)', 'image/icon/fuleyonghedoujiang.jpg', '104.082886', '30.63318', '武侯区科华北路50号	', '来永和豆浆,豆浆油条永远的质量和口味', '3', '15', '6');
+INSERT INTO `shop` VALUES ('1034', 'sanger', '黄家驹', 'image/icon/20140716/20140716153010_796.png', '104.068008', '30.62854', '成都市武侯区人民南路4段-11号-附5号', '那就看看', '5', '566', '2');
+INSERT INTO `shop` VALUES ('1035', 'sanger', '黄家驹', 'image/icon/20140716/20140716160331_843.png', '104.067562', '30.628651', '成都市武侯区人民南路4段-11号-附5号', '不仅仅', '4', '89', '2');
+INSERT INTO `shop` VALUES ('1036', 'sanger', '香草天空西餐厅', 'image/icon/xiangcaotiankongcanting.jpg', '104.08324', '30.633134', '成都市武侯区科华北路125号(近川大西门)', '仅售138元，价值227元的单人西餐！优质牛扒3选1+招牌浓汤2选1+健康沙拉2选1+餐后饮品，一个人一样可以精彩，享受自我时光！', '4', '66', '4');
+INSERT INTO `shop` VALUES ('1037', 'sanger', '三只耳火锅(倪家桥总店)', 'image/icon/sanzhierhuoguo.jpg', '104.067373', '30.630904', '成都市武侯区倪家桥路10号三只耳大厦', '仅售198元，价值307元倪家桥总店4人午餐！满足挑剔的你，浓浓美味萦绕味蕾挥之不去，浓情美味就在这！不同凡响的口味，精心熬制的风味锅底！', '4', '76', '1');
+INSERT INTO `shop` VALUES ('1038', 'sanger', '澳洲肥牛', 'image/icon/aozhoufeiniu.jpg', '104.085467', '30.658424', '成都市锦江区东大街97号香槟广场3楼	', '仅售59元，价值68元香槟店单人自助午餐！1人1锅，上等优质肥牛，锅底美味飘香，蘸料多样，酒水不限量畅饮，到店另付14元可升级为自助晚餐！', '4', '74', '2');
+INSERT INTO `shop` VALUES ('1039', 'sanger', '丽江龙继斑鱼', 'image/icon/lijianglongjibanyu.jpg', '104.08333', '30.633367', '成都市武侯区科华北路121号(川大西门公馆菜楼下)	', '仅售168元，价值340元4-6人火锅套餐！地道斑鱼火锅，均选用鲜活斑鱼，秘制汤底，搭配丰富涮菜，健康营养好食，提供免费wifi，节假日通用！', '4', '59', '1');
+INSERT INTO `shop` VALUES ('1040', 'sanger', '阿郎山烤肉美食超市', 'image/icon/alangshankaorou.jpg', '104.083121', '30.636544', '成都市武侯区科华北路63号2楼（润禾医院对面）', '仅售45.3元，价值59元单人自助晚餐！地道烤肉，多种菜品选择，一饱口福，味蕾与心灵的双重享受！快和亲友，一起走进这美食天地吧！', '4', '46', '10');
+INSERT INTO `shop` VALUES ('1041', 'sanger', '沈小福米线(科华店)', 'image/icon/shenxiaofumixian.jpg', '104.083651', '30.6289', '成都武侯区科华北路143号蓝色加勒比广场1楼(近四川大学南门)	', '全家福，沈小福！', '3.5', '12', '6');
+INSERT INTO `shop` VALUES ('1042', 'sanger', '鼎泰丰', 'image/icon/dingtaifeng.jpg', '104.074158', '30.637049', '武侯区人民南路四段3号来福士广场2楼(省体育馆对面)	', '全国连锁，第一汤包！', '4', '117', '6');
+INSERT INTO `shop` VALUES ('1043', 'sanger', '竹篓香冒菜馆', 'image/icon/zhulouxiang.jpg', '104.089357', '30.631603', '成都武侯区郭家桥北街4号(近四川大学)', '环境很不赖，有格调。荤菜叫冒得快，素菜叫慢慢冒', '4', '21', '7');
+INSERT INTO `shop` VALUES ('1044', 'sanger', '成都映象·小场合(王府井店)', 'image/icon/chengduyingxiangxiaoxch.jpg', '104.082797', '30.625994', '成都武侯区科华中路9号王府井百货4楼	', '水煮鱼和蚂蚁上树做得不错，鱼很嫩，蚂蚁上树微辣，酱油饭不功不过，价格挺便宜', '4', '53', '7');
+INSERT INTO `shop` VALUES ('1045', 'sanger', '公社冒菜馆', 'image/icon/gongshemaocai.jpg', '104.085949', '30.629374', '成都市武侯区科华街1号附18号', '好吃！必须一斤一斤的吃！', '3.5', '21', '7');
+INSERT INTO `shop` VALUES ('1046', 'sanger', '又回来特色冒菜(竹林公寓东)', 'image/icon/youhuilai.jpg', '104.09021', '30.631137', '成都武侯区郭家桥北街5号附7(川大南门外)	', '特色冒菜为主打的招牌', '3', '10', '7');
+INSERT INTO `shop` VALUES ('1047', 'sanger', '筷乐园砂锅炒菜', 'image/icon/kuaileyuanshaguochaocai.jpg', '104.090172', '30.631129', '武侯区郭家桥北街5号附16号(近四川大学南门)', '好吃的不得了', '1', '15', '8');
+INSERT INTO `shop` VALUES ('1048', 'sanger', '老妈豆花玉林店', 'image/icon/laomadouhua.jpg', '104.072791', '30.633095', '成都武侯区玉林东街', '鸡汁豆花很好吃 豆腐比较嫩 闷在鸡汁里也比较入味', '4.5', '20', '9');
+INSERT INTO `shop` VALUES ('1049', 'sanger', '土家族爱恨怪豆花', 'image/icon/tujiazuaihenguaidouhua.jpg', '104.079684', '30.633872', '成都武侯区锦苑巷14号(近金苹果国际幼儿园)	', '味道比较清淡按荤素菜不同分为1-5品，我们一般吃三品，大概是22元一客。汤很鲜香，又没有味精的味道，很赞！豆花里面放了很多瘦肉末，吃起来没有豆子的涩味，而且很香。豆花和素菜免费加', '3', '29', '9');
+INSERT INTO `shop` VALUES ('1050', 'sanger', '港九茶餐厅(力宝大厦店)', 'image/icon/gangjiuchacanting.jpg', '104.082743', '30.629506', '成都武侯区科华北路62号力宝大厦北楼1楼(近沸城)', '海南鸡饭！经典早茶！', '4', '46', '10');
+INSERT INTO `shop` VALUES ('1051', 'sanger', '悠游居酒屋', 'image/icon/youyoujujiuwu.jpg', '104.08306', '30.630189', '成都武侯区科华北路60号', '去吃自助嘛，中午才100元一个人，还含清酒，不过本人倒觉得清酒是在没有神马好喝的，甜醪糟吧，呵呵！喜欢三文鱼刺身的朋友一定可以吃到饱，刺身很新鲜，去吃过很多次（我有点儿爱吃日本菜），尽管每次切的形状有差异，有时候是条条，有时候是片片，不过都很新鲜，肥美鲜香；花寿司啊～～惊为天人啊～～太太太好吃了，是我吃过所有日本餐厅里最好吃的，当然还包括守屋啊北海道啊还有加太贺还有些说不出名字不是很出名的外卖寿司，这家绝对是最好吃的，想起我口水都在流～～～反正就是上面加一点奶酪，哇噻，简直不摆了！天妇罗还可以，火候掌握得不错，而且真材实料的，不像某些店店，咳咳咳～～还是不说别家的坏话算了。最后提醒一句，现场做菜的小伙子厨师们，个个都长得不错，你走的时候还会跟你打招呼', '5', '115', '10');
+INSERT INTO `shop` VALUES ('1052', 'sanger', '北海道日本料理科华店', 'image/icon/beihaidaoribenliaoli.jpg', '104.08415', '30.629513', '成都武侯区科华北路143号蓝色加勒比广场101室(近四川大学南门)', '龙虾！龙虾！', '3', '107', '10');
+INSERT INTO `shop` VALUES ('1053', 'sanger', '泰国鱼翅馆(盛隆街店)', 'image/icon/taiguoyuchiguan.jpg', '104.078395', '30.628791', '武侯区领事馆路盛隆街10号(中日会馆对面)	', '环境很好。最关键服务更好!', '4.5', '125', '10');
+INSERT INTO `shop` VALUES ('1087', 'admin', '八年级', 'image/icon/20140717/20140717163925_890020140717163925_890.png', '104.068132', '30.629378', '四川省成都市武侯区美领事馆美食区成科西路3号', '。你看看看看', '3.5', '99', null);
+INSERT INTO `type` VALUES ('1', '火锅');
+INSERT INTO `type` VALUES ('2', '干锅');
+INSERT INTO `type` VALUES ('3', '清真');
+INSERT INTO `type` VALUES ('4', '西餐');
+INSERT INTO `type` VALUES ('5', '串串');
+INSERT INTO `type` VALUES ('6', '快餐');
+INSERT INTO `type` VALUES ('7', '冒菜');
+INSERT INTO `type` VALUES ('8', '炒菜');
+INSERT INTO `type` VALUES ('9', '豆花');
+INSERT INTO `type` VALUES ('10', '其他');
+INSERT INTO `user` VALUES ('123456', null, '12345');
+INSERT INTO `user` VALUES ('123456789', null, '123');
+INSERT INTO `user` VALUES ('admin', 'abc', '123');
+INSERT INTO `user` VALUES ('chen', '', 'hahahahahaa');
+INSERT INTO `user` VALUES ('fancy', '123', '123');
+INSERT INTO `user` VALUES ('nike', null, '123');
+INSERT INTO `user` VALUES ('ning', null, '123');
+INSERT INTO `user` VALUES ('sanger', null, '123456');
+INSERT INTO `user` VALUES ('sb', null, '123');
+INSERT INTO `user` VALUES ('shaobing', null, '123');
+INSERT INTO `user` VALUES ('stu', null, '123456');
+INSERT INTO `user` VALUES ('zaza', null, '123456');

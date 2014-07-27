@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <!-- 简介 -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/info_simple"
+                android:textSize="@dimen/text_size_middle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/poiDesItem_Height"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="@dimen/poiDesItem_Wide"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/shopName" />
+
+                    <TextView
+                        android:id="@+id/shopName_poidetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/poiDesItem_Height"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="@dimen/poiDesItem_Wide"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/costAvg" />
+
+                    <TextView
+                        android:id="@+id/costAvg_poidetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/Red"
+                        android:singleLine="true" />
+                </LinearLayout>
+
+             
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/poiDesItem_Height"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="@dimen/poiDesItem_Wide"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/gradeAvg" />
+
+                    <RatingBar
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/gradeAvg_poidetail"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:numStars="5" />
+                </LinearLayout>
+                   <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="@dimen/poiDesItem_Wide"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/adress" />
+                    <TextView
+                        android:id="@+id/address_poidetail"
+                        android:padding="@dimen/layut_padding_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                </LinearLayout>
+                
+            </LinearLayout>
+
+            <!-- 特色 -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/feature"
+                android:textSize="@dimen/text_size_middle" />
+
+            <TextView
+                android:id="@+id/feature_poidetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_middle" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

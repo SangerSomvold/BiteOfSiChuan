@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/WebRoot/WEB-INF/lib/json
+END
+ezmorph-1.0.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/WebRoot/WEB-INF/lib/json/ezmorph-1.0.6.jar
+END
+commons-lang-2.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/WebRoot/WEB-INF/lib/json/commons-lang-2.3.jar
+END
+json-lib-2.4-jdk15.jar
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/WebRoot/WEB-INF/lib/json/json-lib-2.4-jdk15.jar
+END
+commons-beanutils.jar
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/WebRoot/WEB-INF/lib/json/commons-beanutils.jar
+END
+json-jena-1.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/FoodMapServer/!svn/ver/2/FoodMapServer/WebRoot/WEB-INF/lib/json/json-jena-1.0.jar
+END
