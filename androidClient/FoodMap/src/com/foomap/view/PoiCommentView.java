@@ -2,18 +2,6 @@ package com.foomap.view;
 
 import java.util.ArrayList;
 
-import com.foodmap.R;
-import com.foomap.model.CommentData;
-import com.foomap.pulltorefresh.library.PullToRefreshBase;
-import com.foomap.pulltorefresh.library.PullToRefreshBase.Mode;
-import com.foomap.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import com.foomap.pulltorefresh.library.PullToRefreshListView;
-import com.foomap.service.CommentHttpService;
-import com.foomap.service.HttpServiceHelper.IOnHttpRequeseListener;
-import com.foomap.util.CommentJsonUtil;
-import com.foomap.util.DensityUtil;
-import com.foomap.util.ImageManager;
-
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +16,18 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.foodmap.R;
+import com.foomap.model.CommentData;
+import com.foomap.service.CommentHttpService;
+import com.foomap.service.HttpServiceHelper.IOnHttpRequeseListener;
+import com.foomap.util.CommentJsonUtil;
+import com.foomap.util.DensityUtil;
+import com.foomap.util.ImageManager;
+import com.foomap.view.lib.PullToRefreshBase;
+import com.foomap.view.lib.PullToRefreshBase.Mode;
+import com.foomap.view.lib.PullToRefreshBase.OnRefreshListener;
+import com.foomap.view.lib.PullToRefreshListView;
 
 public class PoiCommentView extends LinearLayout {
 	private Context context;

@@ -630,19 +630,20 @@ containing a value of this type.
         public static final int passwordchange=0x7f03000c;
         public static final int personalpage_lv=0x7f03000d;
         public static final int personalpagerow=0x7f03000e;
-        public static final int poidescription=0x7f03000f;
-        public static final int poidetail=0x7f030010;
-        public static final int pull_to_refresh_header_horizontal=0x7f030011;
-        public static final int pull_to_refresh_header_vertical=0x7f030012;
-        public static final int register=0x7f030013;
-        public static final int show_picture_activity_grid_item=0x7f030014;
-        public static final int show_picture_activity_main=0x7f030015;
-        public static final int sr_ll_classify=0x7f030016;
-        public static final int sr_ll_location=0x7f030017;
-        public static final int sr_ll_main_item=0x7f030018;
-        public static final int sr_ll_sort=0x7f030019;
-        public static final int sr_rl_main=0x7f03001a;
-        public static final int sr_tv_simple_item=0x7f03001b;
+        public static final int poi_comment_pic=0x7f03000f;
+        public static final int poidescription=0x7f030010;
+        public static final int poidetail=0x7f030011;
+        public static final int pull_to_refresh_header_horizontal=0x7f030012;
+        public static final int pull_to_refresh_header_vertical=0x7f030013;
+        public static final int register=0x7f030014;
+        public static final int show_picture_activity_grid_item=0x7f030015;
+        public static final int show_picture_activity_main=0x7f030016;
+        public static final int sr_ll_classify=0x7f030017;
+        public static final int sr_ll_location=0x7f030018;
+        public static final int sr_ll_main_item=0x7f030019;
+        public static final int sr_ll_sort=0x7f03001a;
+        public static final int sr_rl_main=0x7f03001b;
+        public static final int sr_tv_simple_item=0x7f03001c;
     }
     public static final class string {
         public static final int action_settings=0x7f08001d;

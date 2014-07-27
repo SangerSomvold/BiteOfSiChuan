@@ -23,9 +23,6 @@ import com.baidu.location.BDLocationListener;
 import com.foodmap.R;
 import com.foomap.model.ShopData;
 import com.foomap.model.TypeData;
-import com.foomap.pulltorefresh.library.PullToRefreshBase;
-import com.foomap.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
-import com.foomap.pulltorefresh.library.PullToRefreshListView;
 import com.foomap.service.HttpServiceHelper.IOnHttpRequeseListener;
 import com.foomap.service.LocationSever;
 import com.foomap.service.ShophttpService;
@@ -35,6 +32,10 @@ import com.foomap.util.SearchResultListAdapter;
 import com.foomap.util.ShopJsonUtils;
 import com.foomap.view.SearchResultPopClassifyWindow;
 import com.foomap.view.SearchResultPopSortWindow;
+import com.foomap.view.lib.PullToRefreshBase;
+import com.foomap.view.lib.PullToRefreshBase.Mode;
+import com.foomap.view.lib.PullToRefreshBase.OnRefreshListener;
+import com.foomap.view.lib.PullToRefreshListView;
 
 public class SearchResultActivity extends Activity implements OnClickListener {
 
@@ -57,7 +58,7 @@ public class SearchResultActivity extends Activity implements OnClickListener {
 
 		isFirstConnected = true;
 		mLvMain = (PullToRefreshListView) findViewById(R.id.lvSrList);
-		mLvMain.setMode(com.foomap.pulltorefresh.library.PullToRefreshBase.Mode.PULL_FROM_END);
+		mLvMain.setMode(Mode.PULL_FROM_END);
 		mTvMyPlace = (TextView) findViewById(R.id.tvSrMyPlace);
 		mTvSearchKeyword = (TextView) findViewById(R.id.tvSrKeyword);
 		mIbMap = (ImageButton) findViewById(R.id.ibSrMap);
@@ -161,7 +162,7 @@ public class SearchResultActivity extends Activity implements OnClickListener {
 			public void onDismiss() {
 				if (myAdapter.isPopupwindowUpdate) {
 					findViewById(R.id.pbSrRefresh).setVisibility(View.VISIBLE);
-					mLvMain.setMode(com.foomap.pulltorefresh.library.PullToRefreshBase.Mode.PULL_FROM_END);
+					mLvMain.setMode(Mode.PULL_FROM_END);
 					myAdapter.mShopList.clear();
 					myAdapter.mDataType = 1;
 					myAdapter.mPagerNum = 1;
@@ -175,7 +176,7 @@ public class SearchResultActivity extends Activity implements OnClickListener {
 			@Override
 			public void onDismiss() {
 				if (myAdapter.isPopupwindowUpdate) {
-					mLvMain.setMode(com.foomap.pulltorefresh.library.PullToRefreshBase.Mode.PULL_FROM_END);
+					mLvMain.setMode(Mode.PULL_FROM_END);
 					findViewById(R.id.pbSrRefresh).setVisibility(View.VISIBLE);
 					myAdapter.mShopList.clear();
 					myAdapter.mPagerNum = 1;
@@ -266,7 +267,7 @@ public class SearchResultActivity extends Activity implements OnClickListener {
 					mLvMain.onRefreshComplete();
 
 					if (srShopList.size() == 0) {
-						mLvMain.setMode(com.foomap.pulltorefresh.library.PullToRefreshBase.Mode.DISABLED);
+						mLvMain.setMode(Mode.DISABLED);
 						Toast.makeText(SearchResultActivity.this, "没有更多了噢亲",
 								Toast.LENGTH_SHORT).show();
 					}

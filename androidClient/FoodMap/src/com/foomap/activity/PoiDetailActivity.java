@@ -1,4 +1,3 @@
-
 package com.foomap.activity;
 
 import java.util.ArrayList;
