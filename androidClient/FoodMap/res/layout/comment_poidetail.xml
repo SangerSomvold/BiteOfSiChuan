@@ -5,7 +5,7 @@
     android:background="@color/Ivory"
     android:orientation="vertical" >
 
-    <com.foomap.pulltorefresh.library.PullToRefreshListView
+    <com.foomap.view.lib.PullToRefreshListView
         android:id="@+id/commentList_poiDetail"
         android:layout_width="match_parent"
         android:layout_height="0dip"
@@ -13,6 +13,6 @@
         android:layout_weight="1"
         android:divider="@color/Ivory"
         android:dividerHeight="@dimen/dividerHeight" >
-    </com.foomap.pulltorefresh.library.PullToRefreshListView>
+    </com.foomap.view.lib.PullToRefreshListView>
 
 </LinearLayout>

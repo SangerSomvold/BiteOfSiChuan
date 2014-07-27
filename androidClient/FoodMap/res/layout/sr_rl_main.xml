@@ -100,14 +100,14 @@
         android:layout_below="@+id/tvSrMyPlace"
         android:background="@color/white" />
 
-    <com.foomap.pulltorefresh.library.PullToRefreshListView
+    <com.foomap.view.lib.PullToRefreshListView
         android:id="@+id/lvSrList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_below="@+id/pbSrRefresh"
         android:background="@null" >
-    </com.foomap.pulltorefresh.library.PullToRefreshListView>
+    </com.foomap.view.lib.PullToRefreshListView>
 
     <ImageButton
         android:id="@+id/ibSrMap"
